@@ -1,4 +1,4 @@
-﻿namespace NoteTakingAppUI
+﻿namespace NoteTakingUI
 {
 	partial class NoteEditForm
 	{

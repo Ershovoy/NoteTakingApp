@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace NoteTakingAppUI
+namespace NoteTakingUI
 {
 	public partial class NoteEditForm : Form
 	{

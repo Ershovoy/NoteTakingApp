@@ -1,4 +1,4 @@
-﻿namespace NoteTakingAppUI
+﻿namespace NoteTakingUI
 {
 	public partial class AboutForm : Form
 	{
