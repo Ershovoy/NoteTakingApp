@@ -1,7 +1,6 @@
-﻿namespace NoteTaking
-{
-	public class NoteCategoryType
-	{
+﻿namespace NoteTaking;
 
-	}
+public class NoteCategoryType
+{
+
 }
