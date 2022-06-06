@@ -1,6 +1,6 @@
 ﻿namespace NoteTaking;
 
-public class NoteCategoryType
+public enum NoteCategoryType
 {
 
 }
