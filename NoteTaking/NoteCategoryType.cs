@@ -1,5 +1,8 @@
 ﻿namespace NoteTaking;
 
+/// <summary>
+/// Перечисление категории заметкок.
+/// </summary>
 public enum NoteCategoryType
 {
 	Default,
