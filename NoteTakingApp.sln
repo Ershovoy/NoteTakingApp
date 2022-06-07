@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoteTaking", "NoteTaking\No
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoteTaking.UnitTests", "NoteTaking.UnitTests\NoteTaking.UnitTests.csproj", "{C9B9187B-CF90-4E30-A16B-FC36509A86B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoteTakingUI", "NoteTakingUI\NoteTakingUI.csproj", "{E2B82643-BE67-497B-BDE3-F6A8588B80C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C9B9187B-CF90-4E30-A16B-FC36509A86B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9B9187B-CF90-4E30-A16B-FC36509A86B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9B9187B-CF90-4E30-A16B-FC36509A86B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2B82643-BE67-497B-BDE3-F6A8588B80C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2B82643-BE67-497B-BDE3-F6A8588B80C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2B82643-BE67-497B-BDE3-F6A8588B80C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2B82643-BE67-497B-BDE3-F6A8588B80C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
