@@ -1,20 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿namespace NoteTakingUI;
 
-namespace NoteTakingUI
+public partial class NoteEditForm : Form
 {
-	public partial class NoteEditForm : Form
+	public NoteEditForm()
 	{
-		public NoteEditForm()
-		{
-			InitializeComponent();
-		}
+		InitializeComponent();
 	}
 }

@@ -1,10 +1,9 @@
-﻿namespace NoteTakingUI
+﻿namespace NoteTakingUI;
+
+public partial class AboutForm : Form
 {
-	public partial class AboutForm : Form
+	public AboutForm()
 	{
-		public AboutForm()
-		{
-			InitializeComponent();
-		}
+		InitializeComponent();
 	}
 }
