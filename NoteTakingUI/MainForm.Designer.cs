@@ -1,4 +1,4 @@
-﻿namespace NoteTakingUI
+namespace NoteTakingUI
 {
 	partial class MainForm
 	{
@@ -46,9 +46,9 @@
 			this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.addNoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.editNoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.removeNoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.AddNoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.EditNoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.DeleteNoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).BeginInit();
@@ -112,6 +112,7 @@
 			this.NoteTextRichTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.NoteTextRichTextBox.Enabled = false;
 			this.NoteTextRichTextBox.Location = new System.Drawing.Point(3, 93);
 			this.NoteTextRichTextBox.Name = "NoteTextRichTextBox";
 			this.NoteTextRichTextBox.Size = new System.Drawing.Size(359, 294);
@@ -167,7 +168,7 @@
 			this.ChangeNoteButton.Name = "ChangeNoteButton";
 			this.ChangeNoteButton.Size = new System.Drawing.Size(40, 40);
 			this.ChangeNoteButton.TabIndex = 4;
-			this.ChangeNoteButton.Text = "=";
+			this.ChangeNoteButton.Text = "/";
 			this.ChangeNoteButton.UseVisualStyleBackColor = true;
 			// 
 			// CreateNoteButton
@@ -186,9 +187,9 @@
 			this.NoteTitleLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.NoteTitleLabel.Location = new System.Drawing.Point(3, 3);
 			this.NoteTitleLabel.Name = "NoteTitleLabel";
-			this.NoteTitleLabel.Size = new System.Drawing.Size(245, 28);
+			this.NoteTitleLabel.Size = new System.Drawing.Size(104, 28);
 			this.NoteTitleLabel.TabIndex = 6;
-			this.NoteTitleLabel.Text = "Первая в мире заметка";
+			this.NoteTitleLabel.Text = "Note title";
 			// 
 			// NoteModifiedDateLabel
 			// 
@@ -213,9 +214,9 @@
 			this.NoteCategoryLabel.AutoSize = true;
 			this.NoteCategoryLabel.Location = new System.Drawing.Point(3, 37);
 			this.NoteCategoryLabel.Name = "NoteCategoryLabel";
-			this.NoteCategoryLabel.Size = new System.Drawing.Size(110, 20);
+			this.NoteCategoryLabel.Size = new System.Drawing.Size(76, 20);
 			this.NoteCategoryLabel.TabIndex = 0;
-			this.NoteCategoryLabel.Text = "Category: Work";
+			this.NoteCategoryLabel.Text = "Category: ";
 			// 
 			// MainMenuStrip
 			// 
@@ -248,30 +249,30 @@
 			// EditToolStripMenuItem
 			// 
 			this.EditToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addNoteToolStripMenuItem,
-            this.editNoteToolStripMenuItem,
-            this.removeNoteToolStripMenuItem});
+            this.AddNoteToolStripMenuItem,
+            this.EditNoteToolStripMenuItem,
+            this.DeleteNoteToolStripMenuItem});
 			this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
 			this.EditToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
 			this.EditToolStripMenuItem.Text = "Edit";
 			// 
-			// addNoteToolStripMenuItem
+			// AddNoteToolStripMenuItem
 			// 
-			this.addNoteToolStripMenuItem.Name = "addNoteToolStripMenuItem";
-			this.addNoteToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
-			this.addNoteToolStripMenuItem.Text = "Add Note";
+			this.AddNoteToolStripMenuItem.Name = "AddNoteToolStripMenuItem";
+			this.AddNoteToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
+			this.AddNoteToolStripMenuItem.Text = "Add Note";
 			// 
-			// editNoteToolStripMenuItem
+			// EditNoteToolStripMenuItem
 			// 
-			this.editNoteToolStripMenuItem.Name = "editNoteToolStripMenuItem";
-			this.editNoteToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
-			this.editNoteToolStripMenuItem.Text = "Edit Note";
+			this.EditNoteToolStripMenuItem.Name = "EditNoteToolStripMenuItem";
+			this.EditNoteToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
+			this.EditNoteToolStripMenuItem.Text = "Edit Note";
 			// 
-			// removeNoteToolStripMenuItem
+			// DeleteNoteToolStripMenuItem
 			// 
-			this.removeNoteToolStripMenuItem.Name = "removeNoteToolStripMenuItem";
-			this.removeNoteToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
-			this.removeNoteToolStripMenuItem.Text = "Remove Note";
+			this.DeleteNoteToolStripMenuItem.Name = "DeleteNoteToolStripMenuItem";
+			this.DeleteNoteToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
+			this.DeleteNoteToolStripMenuItem.Text = "Remove Note";
 			// 
 			// HelpToolStripMenuItem
 			// 
@@ -284,7 +285,7 @@
 			// AboutToolStripMenuItem
 			// 
 			this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-			this.AboutToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+			this.AboutToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
 			this.AboutToolStripMenuItem.Text = "About";
 			this.AboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
 			// 
@@ -298,6 +299,7 @@
 			this.Controls.Add(this.MainMenuStrip);
 			this.MinimumSize = new System.Drawing.Size(640, 480);
 			this.Name = "MainForm";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Note Taking Application";
 			this.MainSplitContainer.Panel1.ResumeLayout(false);
 			this.MainSplitContainer.Panel1.PerformLayout();
@@ -333,9 +335,9 @@
 		private ToolStripMenuItem EditToolStripMenuItem;
 		private ToolStripMenuItem HelpToolStripMenuItem;
 		private ToolStripMenuItem exitToolStripMenuItem;
-		private ToolStripMenuItem addNoteToolStripMenuItem;
-		private ToolStripMenuItem editNoteToolStripMenuItem;
-		private ToolStripMenuItem removeNoteToolStripMenuItem;
+		private ToolStripMenuItem AddNoteToolStripMenuItem;
+		private ToolStripMenuItem EditNoteToolStripMenuItem;
+		private ToolStripMenuItem DeleteNoteToolStripMenuItem;
 		private ToolStripMenuItem AboutToolStripMenuItem;
 	}
 }
