@@ -67,13 +67,12 @@ namespace NoteTakingUI
 			{
 				MessageBox.Show(exception.Message, "Error occured");
 			}
-			
 		}
 
 		/// <summary>
 		/// Удалить выбранную заметку.
 		/// </summary>
-		private void DeleteNoteButton_Click(object sender, EventArgs e)
+		private void RemoveNoteButton_Click(object sender, EventArgs e)
 		{
 			int selectedNoteIndex = NotesListBox.SelectedIndex;
 			try
@@ -81,7 +80,7 @@ namespace NoteTakingUI
 				_notes.RemoveNote(selectedNoteIndex);
 				NotesListBox.Items.RemoveAt(selectedNoteIndex);
 			}
-			catch(Exception exception)
+			catch (Exception exception)
 			{
 				MessageBox.Show(exception.Message, "Error occured");
 			}

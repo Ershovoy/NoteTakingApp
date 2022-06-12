@@ -35,7 +35,7 @@ namespace NoteTakingUI
 			this.NoteModifiedDateTime = new System.Windows.Forms.DateTimePicker();
 			this.NoteTextRichTextBox = new System.Windows.Forms.RichTextBox();
 			this.MainSplitContainer = new System.Windows.Forms.SplitContainer();
-			this.DeleteNoteButton = new System.Windows.Forms.Button();
+			this.RemoveNoteButton = new System.Windows.Forms.Button();
 			this.ChangeNoteButton = new System.Windows.Forms.Button();
 			this.CreateNoteButton = new System.Windows.Forms.Button();
 			this.NoteTitleLabel = new System.Windows.Forms.Label();
@@ -130,7 +130,7 @@ namespace NoteTakingUI
 			// 
 			// MainSplitContainer.Panel1
 			// 
-			this.MainSplitContainer.Panel1.Controls.Add(this.DeleteNoteButton);
+			this.MainSplitContainer.Panel1.Controls.Add(this.RemoveNoteButton);
 			this.MainSplitContainer.Panel1.Controls.Add(this.ChangeNoteButton);
 			this.MainSplitContainer.Panel1.Controls.Add(this.CreateNoteButton);
 			this.MainSplitContainer.Panel1.Controls.Add(this.CategoryFilterLabel);
@@ -152,16 +152,16 @@ namespace NoteTakingUI
 			this.MainSplitContainer.SplitterDistance = 229;
 			this.MainSplitContainer.TabIndex = 6;
 			// 
-			// DeleteNoteButton
+			// RemoveNoteButton
 			// 
-			this.DeleteNoteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.DeleteNoteButton.Location = new System.Drawing.Point(95, 347);
-			this.DeleteNoteButton.Name = "DeleteNoteButton";
-			this.DeleteNoteButton.Size = new System.Drawing.Size(40, 40);
-			this.DeleteNoteButton.TabIndex = 5;
-			this.DeleteNoteButton.Text = "-";
-			this.DeleteNoteButton.UseVisualStyleBackColor = true;
-			this.DeleteNoteButton.Click += new System.EventHandler(this.DeleteNoteButton_Click);
+			this.RemoveNoteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.RemoveNoteButton.Location = new System.Drawing.Point(95, 347);
+			this.RemoveNoteButton.Name = "RemoveNoteButton";
+			this.RemoveNoteButton.Size = new System.Drawing.Size(40, 40);
+			this.RemoveNoteButton.TabIndex = 5;
+			this.RemoveNoteButton.Text = "-";
+			this.RemoveNoteButton.UseVisualStyleBackColor = true;
+			this.RemoveNoteButton.Click += new System.EventHandler(this.RemoveNoteButton_Click);
 			// 
 			// ChangeNoteButton
 			// 
@@ -263,23 +263,23 @@ namespace NoteTakingUI
 			// AddNoteToolStripMenuItem
 			// 
 			this.AddNoteToolStripMenuItem.Name = "AddNoteToolStripMenuItem";
-			this.AddNoteToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+			this.AddNoteToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
 			this.AddNoteToolStripMenuItem.Text = "Add Note";
 			this.AddNoteToolStripMenuItem.Click += new System.EventHandler(this.CreateNoteButton_Click);
 			// 
 			// EditNoteToolStripMenuItem
 			// 
 			this.EditNoteToolStripMenuItem.Name = "EditNoteToolStripMenuItem";
-			this.EditNoteToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+			this.EditNoteToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
 			this.EditNoteToolStripMenuItem.Text = "Edit Note";
 			this.EditNoteToolStripMenuItem.Click += new System.EventHandler(this.ChangeNoteButton_Click);
 			// 
 			// DeleteNoteToolStripMenuItem
 			// 
 			this.DeleteNoteToolStripMenuItem.Name = "DeleteNoteToolStripMenuItem";
-			this.DeleteNoteToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+			this.DeleteNoteToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
 			this.DeleteNoteToolStripMenuItem.Text = "Remove Note";
-			this.DeleteNoteToolStripMenuItem.Click += new System.EventHandler(this.DeleteNoteButton_Click);
+			this.DeleteNoteToolStripMenuItem.Click += new System.EventHandler(this.RemoveNoteButton_Click);
 			// 
 			// HelpToolStripMenuItem
 			// 
@@ -334,7 +334,7 @@ namespace NoteTakingUI
 		private Label NoteModifiedDateLabel;
 		private Label NoteCreateDateLabel;
 		private Label NoteTitleLabel;
-		private Button DeleteNoteButton;
+		private Button RemoveNoteButton;
 		private Button ChangeNoteButton;
 		private Button CreateNoteButton;
 		private MenuStrip MainMenuStrip;
