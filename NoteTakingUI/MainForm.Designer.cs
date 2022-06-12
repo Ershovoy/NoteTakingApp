@@ -88,6 +88,7 @@ namespace NoteTakingUI
 			this.NotesListBox.Name = "NotesListBox";
 			this.NotesListBox.Size = new System.Drawing.Size(223, 304);
 			this.NotesListBox.TabIndex = 2;
+			this.NotesListBox.SelectedIndexChanged += new System.EventHandler(this.NotesListBox_SelectedIndexChanged);
 			// 
 			// NoteCreateDateTime
 			// 
@@ -160,6 +161,7 @@ namespace NoteTakingUI
 			this.DeleteNoteButton.TabIndex = 5;
 			this.DeleteNoteButton.Text = "-";
 			this.DeleteNoteButton.UseVisualStyleBackColor = true;
+			this.DeleteNoteButton.Click += new System.EventHandler(this.DeleteNoteButton_Click);
 			// 
 			// ChangeNoteButton
 			// 
@@ -170,6 +172,7 @@ namespace NoteTakingUI
 			this.ChangeNoteButton.TabIndex = 4;
 			this.ChangeNoteButton.Text = "/";
 			this.ChangeNoteButton.UseVisualStyleBackColor = true;
+			this.ChangeNoteButton.Click += new System.EventHandler(this.ChangeNoteButton_Click);
 			// 
 			// CreateNoteButton
 			// 
@@ -180,6 +183,7 @@ namespace NoteTakingUI
 			this.CreateNoteButton.TabIndex = 3;
 			this.CreateNoteButton.Text = "+";
 			this.CreateNoteButton.UseVisualStyleBackColor = true;
+			this.CreateNoteButton.Click += new System.EventHandler(this.CreateNoteButton_Click);
 			// 
 			// NoteTitleLabel
 			// 
@@ -259,20 +263,23 @@ namespace NoteTakingUI
 			// AddNoteToolStripMenuItem
 			// 
 			this.AddNoteToolStripMenuItem.Name = "AddNoteToolStripMenuItem";
-			this.AddNoteToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
+			this.AddNoteToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
 			this.AddNoteToolStripMenuItem.Text = "Add Note";
+			this.AddNoteToolStripMenuItem.Click += new System.EventHandler(this.CreateNoteButton_Click);
 			// 
 			// EditNoteToolStripMenuItem
 			// 
 			this.EditNoteToolStripMenuItem.Name = "EditNoteToolStripMenuItem";
-			this.EditNoteToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
+			this.EditNoteToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
 			this.EditNoteToolStripMenuItem.Text = "Edit Note";
+			this.EditNoteToolStripMenuItem.Click += new System.EventHandler(this.ChangeNoteButton_Click);
 			// 
 			// DeleteNoteToolStripMenuItem
 			// 
 			this.DeleteNoteToolStripMenuItem.Name = "DeleteNoteToolStripMenuItem";
-			this.DeleteNoteToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
+			this.DeleteNoteToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
 			this.DeleteNoteToolStripMenuItem.Text = "Remove Note";
+			this.DeleteNoteToolStripMenuItem.Click += new System.EventHandler(this.DeleteNoteButton_Click);
 			// 
 			// HelpToolStripMenuItem
 			// 
