@@ -24,11 +24,11 @@ public partial class NoteEditForm : Form
 		NoteTextRichTextBox.Text = _noteToEdit.Text;
 		NoteCreateDateTime.Value = _noteToEdit.CreatingTime;
 		NoteModifiedDateTime.Value = _noteToEdit.ModifiedTime;
-		foreach(string noteType in Enum.GetNames(typeof(NoteCategoryType)))
+		foreach (NoteCategoryType noteType in Enum.GetValues(typeof(NoteCategoryType)))
 		{
 			NoteCategoryComboBox.Items.Add(noteType);
 		}
-		NoteCategoryComboBox.SelectedIndex = (int)_noteToEdit.Category;
+		NoteCategoryComboBox.SelectedItem = _noteToEdit.Category;
 	}
 
 	/// <summary>
@@ -54,7 +54,7 @@ public partial class NoteEditForm : Form
 	{
 		_noteToEdit.Title = NoteTitleTextBox.Text;
 		_noteToEdit.Text = NoteTextRichTextBox.Text;
-		_noteToEdit.Category = (NoteCategoryType)NoteCategoryComboBox.SelectedIndex;
+		_noteToEdit.Category = (NoteCategoryType)NoteCategoryComboBox.SelectedItem;
 
 		DialogResult = DialogResult.OK;
 		Close();
