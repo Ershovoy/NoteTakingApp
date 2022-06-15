@@ -42,6 +42,18 @@ public class NotebookTests
 		Assert.Throws<ArgumentOutOfRangeException>(() => { notebook[0].Title = "New title"; });
 	}
 
+	[Test(Description = "Save and load notebook test")]
+	public void SaveLoadNotebookTest()
+	{
+		var expected = new Notebook();
+		expected.AddNote(new Note("First note", "", NoteCategoryType.Default));
+		expected.AddNote(new Note("Second note", "WASD", NoteCategoryType.Home));
+		expected.Save(@"D:\json.txt");
+
+		var actual = new Notebook();
+		actual.Load(@"D:\json.txt");
+	}
+
 	[Test(Description = "Sort notebook test")]
 	public void SortNotebookTest()
 	{

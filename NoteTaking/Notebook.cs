@@ -1,4 +1,6 @@
-﻿namespace NoteTaking;
+﻿using Newtonsoft.Json;
+
+namespace NoteTaking;
 
 /// <summary>
 /// Блокнот
@@ -72,6 +74,24 @@ public class Notebook
 		{
 			return y.Category.CompareTo(noteCategory);
 		});
+	}
+
+	/// <summary>
+	/// Сохранить заметки по указанному пути.
+	/// </summary>
+	/// <param name="filePath">Путь сохранения.</param>
+	public void Save(string filePath)
+	{
+		File.WriteAllText(filePath, JsonConvert.SerializeObject(_notes, Formatting.Indented));
+	}
+
+	/// <summary>
+	/// Загрузить заметки с указанного файла.
+	/// </summary>
+	/// <param name="filePath">Файл для загрузки.</param>
+	public void Load(string filePath)
+	{
+		_notes = JsonConvert.DeserializeObject<List<Note>>(File.ReadAllText(filePath));
 	}
 
 	/// <summary>
