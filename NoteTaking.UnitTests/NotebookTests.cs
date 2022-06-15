@@ -41,4 +41,20 @@ public class NotebookTests
 
 		Assert.Throws<ArgumentOutOfRangeException>(() => { notebook[0].Title = "New title"; });
 	}
+
+	[Test(Description = "Sort notebook test")]
+	public void SortNotebookTest()
+	{
+		var notebook = new Notebook();
+		notebook.AddNote(new Note("First note", "", NoteCategoryType.Default));
+		notebook.AddNote(new Note("Second note", "", NoteCategoryType.Home));
+		notebook.AddNote(new Note("Third note", "", NoteCategoryType.Default));
+		notebook.AddNote(new Note("Fourth note", "", NoteCategoryType.Home));
+		notebook.AddNote(new Note("Fifth note", "", NoteCategoryType.Document));
+		var expected = notebook[1];
+		
+		notebook.SortBy(NoteCategoryType.Home);
+		var actual = notebook[0];
+		Assert.That(expected.Category, Is.EqualTo(actual.Category));
+	}
 }
