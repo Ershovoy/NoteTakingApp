@@ -139,6 +139,14 @@ public partial class MainForm : Form
 	}
 
 	/// <summary>
+	/// Закрытие приложения через меню.
+	/// </summary>
+	private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+	{
+		Close();
+	}
+
+	/// <summary>
 	/// Реализация.
 	/// </summary>
 
