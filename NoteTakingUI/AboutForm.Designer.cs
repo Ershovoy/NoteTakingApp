@@ -34,8 +34,6 @@
 			this.CopyrightLabel = new System.Windows.Forms.Label();
 			this.GitHubLinkLabel = new System.Windows.Forms.LinkLabel();
 			this.GitHubLabel = new System.Windows.Forms.Label();
-			this.EmailLabel = new System.Windows.Forms.Label();
-			this.EmailLinkLabel = new System.Windows.Forms.LinkLabel();
 			this.SuspendLayout();
 			// 
 			// AppTitleLabel
@@ -85,6 +83,7 @@
 			this.GitHubLinkLabel.TabStop = true;
 			this.GitHubLinkLabel.Tag = "";
 			this.GitHubLinkLabel.Text = "Ershovoy/NoteTakingApp";
+			this.GitHubLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.GitHubLinkLabel_LinkClicked);
 			// 
 			// GitHubLabel
 			// 
@@ -95,32 +94,11 @@
 			this.GitHubLabel.TabIndex = 12;
 			this.GitHubLabel.Text = "GitHub:";
 			// 
-			// EmailLabel
-			// 
-			this.EmailLabel.AutoSize = true;
-			this.EmailLabel.Location = new System.Drawing.Point(12, 136);
-			this.EmailLabel.Name = "EmailLabel";
-			this.EmailLabel.Size = new System.Drawing.Size(49, 20);
-			this.EmailLabel.TabIndex = 13;
-			this.EmailLabel.Text = "Email:";
-			// 
-			// EmailLinkLabel
-			// 
-			this.EmailLinkLabel.AutoSize = true;
-			this.EmailLinkLabel.Location = new System.Drawing.Point(67, 136);
-			this.EmailLinkLabel.Name = "EmailLinkLabel";
-			this.EmailLinkLabel.Size = new System.Drawing.Size(176, 20);
-			this.EmailLinkLabel.TabIndex = 14;
-			this.EmailLinkLabel.TabStop = true;
-			this.EmailLinkLabel.Text = "ershov64372@gmail.com";
-			// 
 			// AboutForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(302, 193);
-			this.Controls.Add(this.EmailLinkLabel);
-			this.Controls.Add(this.EmailLabel);
 			this.Controls.Add(this.GitHubLabel);
 			this.Controls.Add(this.GitHubLinkLabel);
 			this.Controls.Add(this.CopyrightLabel);
@@ -147,7 +125,5 @@
 		private Label CopyrightLabel;
 		private LinkLabel GitHubLinkLabel;
 		private Label GitHubLabel;
-		private Label EmailLabel;
-		private LinkLabel EmailLinkLabel;
 	}
 }
