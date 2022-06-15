@@ -62,6 +62,18 @@ public class Notebook
 		_notes.RemoveAt(index);
 	}
 
+	public void SortBy(NoteCategoryType noteCategory)
+	{
+		_notes.Sort((x, y) =>
+		{
+			return x.Category.CompareTo(y.Category);
+		});
+		_notes.Sort((x, y) =>
+		{
+			return y.Category.CompareTo(noteCategory);
+		});
+	}
+
 	/// <summary>
 	/// Реализация.
 	/// </summary>
