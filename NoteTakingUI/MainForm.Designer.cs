@@ -76,6 +76,7 @@ namespace NoteTakingUI
 			this.CategoryComboBox.Name = "CategoryComboBox";
 			this.CategoryComboBox.Size = new System.Drawing.Size(108, 28);
 			this.CategoryComboBox.TabIndex = 1;
+			this.CategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
 			// 
 			// NotesListBox
 			// 

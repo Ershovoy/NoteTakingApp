@@ -16,6 +16,12 @@ public partial class MainForm : Form
 		InitializeComponent();
 
 		_notes = new();
+
+		foreach (NoteCategoryType noteCategoryType in Enum.GetValues(typeof(NoteCategoryType)))
+		{
+			CategoryComboBox.Items.Add(noteCategoryType);
+		}
+		CategoryComboBox.SelectedIndex = 0;
 	}
 
 	/// <summary>
@@ -99,6 +105,19 @@ public partial class MainForm : Form
 			NoteTextRichTextBox.Text = selectedNote.Text;
 			NoteCreateDateTime.Value = selectedNote.CreatingTime;
 			NoteModifiedDateTime.Value = selectedNote.ModifiedTime;
+		}
+	}
+
+	/// <summary>
+	/// Сортировка заметок по заданной категории.
+	/// </summary>
+	private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+	{
+		_notes.SortBy((NoteCategoryType)CategoryComboBox.SelectedItem);
+		NotesListBox.Items.Clear();
+		for (int i = 0; i < _notes.NotesCount; ++i)
+		{
+			NotesListBox.Items.Add(_notes[i].Title);
 		}
 	}
 
