@@ -71,6 +71,7 @@ namespace NoteTakingUI
 			// 
 			this.CategoryComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.CategoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.CategoryComboBox.FormattingEnabled = true;
 			this.CategoryComboBox.Location = new System.Drawing.Point(118, 3);
 			this.CategoryComboBox.Name = "CategoryComboBox";

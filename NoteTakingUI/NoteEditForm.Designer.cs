@@ -61,6 +61,7 @@
 			// 
 			// NoteCategoryComboBox
 			// 
+			this.NoteCategoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.NoteCategoryComboBox.FormattingEnabled = true;
 			this.NoteCategoryComboBox.Location = new System.Drawing.Point(90, 45);
 			this.NoteCategoryComboBox.Name = "NoteCategoryComboBox";
