@@ -265,21 +265,21 @@ namespace NoteTakingUI
 			// AddNoteToolStripMenuItem
 			// 
 			this.AddNoteToolStripMenuItem.Name = "AddNoteToolStripMenuItem";
-			this.AddNoteToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
+			this.AddNoteToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
 			this.AddNoteToolStripMenuItem.Text = "Add Note";
 			this.AddNoteToolStripMenuItem.Click += new System.EventHandler(this.CreateNoteButton_Click);
 			// 
 			// EditNoteToolStripMenuItem
 			// 
 			this.EditNoteToolStripMenuItem.Name = "EditNoteToolStripMenuItem";
-			this.EditNoteToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
+			this.EditNoteToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
 			this.EditNoteToolStripMenuItem.Text = "Edit Note";
 			this.EditNoteToolStripMenuItem.Click += new System.EventHandler(this.ChangeNoteButton_Click);
 			// 
 			// DeleteNoteToolStripMenuItem
 			// 
 			this.DeleteNoteToolStripMenuItem.Name = "DeleteNoteToolStripMenuItem";
-			this.DeleteNoteToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
+			this.DeleteNoteToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
 			this.DeleteNoteToolStripMenuItem.Text = "Remove Note";
 			this.DeleteNoteToolStripMenuItem.Click += new System.EventHandler(this.RemoveNoteButton_Click);
 			// 
@@ -294,7 +294,7 @@ namespace NoteTakingUI
 			// AboutToolStripMenuItem
 			// 
 			this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-			this.AboutToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
+			this.AboutToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
 			this.AboutToolStripMenuItem.Text = "About";
 			this.AboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
 			// 
@@ -310,6 +310,7 @@ namespace NoteTakingUI
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Note Taking Application";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
 			this.MainSplitContainer.Panel1.ResumeLayout(false);
 			this.MainSplitContainer.Panel1.PerformLayout();
 			this.MainSplitContainer.Panel2.ResumeLayout(false);

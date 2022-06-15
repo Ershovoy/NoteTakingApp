@@ -22,6 +22,15 @@ public partial class MainForm : Form
 			CategoryComboBox.Items.Add(noteCategoryType);
 		}
 		CategoryComboBox.SelectedIndex = 0;
+
+		if (File.Exists(@"NotesSaveData.txt"))
+		{
+			_notes.Load(@"NotesSaveData.txt");
+			for (int i = 0; i < _notes.NotesCount; ++i)
+			{
+				NotesListBox.Items.Add(_notes[i].Title);
+			}
+		}
 	}
 
 	/// <summary>
@@ -119,6 +128,14 @@ public partial class MainForm : Form
 		{
 			NotesListBox.Items.Add(_notes[i].Title);
 		}
+	}
+
+	/// <summary>
+	/// Сохранение заметок в файл во время закрытия.
+	/// </summary>
+	private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+	{
+		_notes.Save(@"NotesSaveData.txt");
 	}
 
 	/// <summary>
