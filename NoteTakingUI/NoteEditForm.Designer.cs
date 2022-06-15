@@ -56,7 +56,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.NoteTitleTextBox.Location = new System.Drawing.Point(90, 12);
 			this.NoteTitleTextBox.Name = "NoteTitleTextBox";
-			this.NoteTitleTextBox.Size = new System.Drawing.Size(520, 27);
+			this.NoteTitleTextBox.Size = new System.Drawing.Size(300, 27);
 			this.NoteTitleTextBox.TabIndex = 1;
 			// 
 			// NoteCategoryComboBox
@@ -119,14 +119,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.NoteTextRichTextBox.Location = new System.Drawing.Point(12, 112);
 			this.NoteTextRichTextBox.Name = "NoteTextRichTextBox";
-			this.NoteTextRichTextBox.Size = new System.Drawing.Size(598, 274);
+			this.NoteTextRichTextBox.Size = new System.Drawing.Size(378, 154);
 			this.NoteTextRichTextBox.TabIndex = 10;
 			this.NoteTextRichTextBox.Text = "";
 			// 
 			// OkButton
 			// 
 			this.OkButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.OkButton.Location = new System.Drawing.Point(416, 392);
+			this.OkButton.Location = new System.Drawing.Point(196, 272);
 			this.OkButton.Name = "OkButton";
 			this.OkButton.Size = new System.Drawing.Size(94, 29);
 			this.OkButton.TabIndex = 11;
@@ -137,7 +137,7 @@
 			// CancelButton
 			// 
 			this.CancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.CancelButton.Location = new System.Drawing.Point(516, 392);
+			this.CancelButton.Location = new System.Drawing.Point(296, 272);
 			this.CancelButton.Name = "CancelButton";
 			this.CancelButton.Size = new System.Drawing.Size(94, 29);
 			this.CancelButton.TabIndex = 12;
@@ -149,7 +149,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(622, 433);
+			this.ClientSize = new System.Drawing.Size(402, 313);
 			this.Controls.Add(this.CancelButton);
 			this.Controls.Add(this.OkButton);
 			this.Controls.Add(this.NoteTextRichTextBox);
@@ -161,7 +161,7 @@
 			this.Controls.Add(this.NoteCategoryComboBox);
 			this.Controls.Add(this.NoteTitleTextBox);
 			this.Controls.Add(this.NoteTitleLabel);
-			this.MinimumSize = new System.Drawing.Size(640, 480);
+			this.MinimumSize = new System.Drawing.Size(420, 360);
 			this.Name = "NoteEditForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Edit Note";
