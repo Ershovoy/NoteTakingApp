@@ -44,7 +44,7 @@ namespace NoteTakingUI
 			this.NoteCategoryLabel = new System.Windows.Forms.Label();
 			this.MainMenuStrip = new System.Windows.Forms.MenuStrip();
 			this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.AddNoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.EditNoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -241,16 +241,16 @@ namespace NoteTakingUI
 			// FileToolStripMenuItem
 			// 
 			this.FileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitToolStripMenuItem});
+            this.ExitToolStripMenuItem});
 			this.FileToolStripMenuItem.Name = "FileToolStripMenuItem";
 			this.FileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
 			this.FileToolStripMenuItem.Text = "File";
 			// 
-			// exitToolStripMenuItem
+			// ExitToolStripMenuItem
 			// 
-			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(116, 26);
-			this.exitToolStripMenuItem.Text = "Exit";
+			this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
+			this.ExitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+			this.ExitToolStripMenuItem.Text = "Exit";
 			// 
 			// EditToolStripMenuItem
 			// 
@@ -343,7 +343,7 @@ namespace NoteTakingUI
 		private ToolStripMenuItem FileToolStripMenuItem;
 		private ToolStripMenuItem EditToolStripMenuItem;
 		private ToolStripMenuItem HelpToolStripMenuItem;
-		private ToolStripMenuItem exitToolStripMenuItem;
+		private ToolStripMenuItem ExitToolStripMenuItem;
 		private ToolStripMenuItem AddNoteToolStripMenuItem;
 		private ToolStripMenuItem EditNoteToolStripMenuItem;
 		private ToolStripMenuItem DeleteNoteToolStripMenuItem;
