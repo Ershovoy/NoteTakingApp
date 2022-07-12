@@ -16,6 +16,7 @@ public class Notebook
 	/// </summary>
 	public Notebook()
 	{
+		// TODO: у тебя уже выделяется память при объявлении поля. Зачем второе выделение?
 		_notes = new();
 	}
 
@@ -63,19 +64,22 @@ public class Notebook
 	{
 		_notes.RemoveAt(index);
 	}
-
+	// TODO: xml-комментарии у всех членов класса
+	// TODO: не очевидное название.
 	public void SortBy(NoteCategoryType noteCategory)
 	{
 		_notes.Sort((x, y) =>
 		{
 			return x.Category.CompareTo(y.Category);
 		});
+		// TODO: зачем дважды вызывается сортировка?
 		_notes.Sort((x, y) =>
 		{
 			return y.Category.CompareTo(noteCategory);
 		});
 	}
-
+	// TODO: сохранение и загрузка блокнота - отдельная самостоятельная задача, которая тянет за собой стороннюю библиотеку. Вынести в отдельный класс NotebookSerializer
+	// TODO: класс NotebookSerializer должен определять дефолтный путь для сохранения файлов, но при этом его можно поменять через открытое свойство. Передавать путь в методы каждый раз не надо
 	/// <summary>
 	/// Сохранить заметки по указанному пути.
 	/// </summary>

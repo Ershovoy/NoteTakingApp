@@ -2,6 +2,8 @@
 
 namespace NoteTakingUI;
 
+// TODO: В окне должна быть валидация на длину заголовка
+// TODO: именование формы поменять на NoteForm. Форма может создавать и редактировать заметки, а не только редактировать
 /// <summary>
 /// Форма для редактирования содержимого выбранной заметки.
 /// </summary>
@@ -11,6 +13,7 @@ public partial class NoteEditForm : Form
 	/// Конструкторы.
 	/// </summary>
 
+	// TODO: Если есть get-свойство EditedNote, тогда лучше сделать свойству set вместо передачи заметки в конструктор
 	/// <summary>
 	/// Конструктор без параметров.
 	/// </summary>
@@ -35,6 +38,7 @@ public partial class NoteEditForm : Form
 	/// Свойства.
 	/// </summary>
 
+	// TODO: просто Note
 	/// <summary>
 	/// Редактированная заметка.
 	/// </summary>
@@ -43,6 +47,7 @@ public partial class NoteEditForm : Form
 		get { return _noteToEdit; }
 	}
 
+	// TODO: что за "именты"?
 	/// <summary>
 	/// Именты.
 	/// </summary>

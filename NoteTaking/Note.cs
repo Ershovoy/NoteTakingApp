@@ -5,6 +5,8 @@
 /// </summary>
 public class Note
 {
+	// TODO: порядом членов класса: константы, static и readonly поля, обычные поля, свойства, конструкторы, открытые методы, закрытые методы, обработчики. Переделать порядок членов класса во всём решении 
+	// TODO: xml-комментарии не используются сами по себе, только перед методом, классом, полем
 	/// <summary>
 	/// Конструкторы.
 	/// </summary>
@@ -42,6 +44,7 @@ public class Note
 		Category = _defaultNoteCategory;
 	}
 
+	// TODO: три конструктора можно было бы реализовать одним методом с параметрами по умолчанию или явным наследованием от конструктора
 	/// <summary>
 	/// Создание заметки по заданному заголовку, содержимому и её категории.
 	/// </summary>
@@ -55,6 +58,7 @@ public class Note
 		Category = noteCategory;
 	}
 
+	// TODO: неправильное использование комментария
 	/// <summary>
 	/// Свойства.
 	/// </summary>
@@ -114,6 +118,7 @@ public class Note
 		get { return _modifiedTime; }
 	}
 
+	// TODO: неправильное использование комментария
 	/// <summary>
 	/// Реализация.
 	/// </summary>
@@ -143,6 +148,7 @@ public class Note
 	/// </summary>
 	private DateTime _modifiedTime = DateTime.Now;
 
+	// TODO: static readonly - это const
 	/// <summary>
 	/// Стандартный заголовок заметки.
 	/// </summary>
