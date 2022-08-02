@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
 			this.AppTitleLabel = new System.Windows.Forms.Label();
 			this.AppVersionLabel = new System.Windows.Forms.Label();
 			this.AppAuthorLabel = new System.Windows.Forms.Label();
@@ -105,6 +106,7 @@
 			this.Controls.Add(this.AppAuthorLabel);
 			this.Controls.Add(this.AppVersionLabel);
 			this.Controls.Add(this.AppTitleLabel);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.MaximumSize = new System.Drawing.Size(320, 240);
 			this.MinimizeBox = false;
