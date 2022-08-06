@@ -1,15 +1,15 @@
-namespace NoteTaking.UnitTests;
+п»їnamespace NoteTaking.UnitTests;
 
 using NUnit.Framework;
 
 [TestFixture]
 public class NoteTests
 {
-	// TODO: протестировал не все свойства и методы. Еще куча конструкторов, и еще в куче свойств обновляет время изменения, но тестишь его только в одном NoteCategory - надо везде. А еще проверка дефолтных значений
+	// TODO: РїСЂРѕС‚РµСЃС‚РёСЂРѕРІР°Р» РЅРµ РІСЃРµ СЃРІРѕР№СЃС‚РІР° Рё РјРµС‚РѕРґС‹. Р•С‰Рµ РєСѓС‡Р° РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂРѕРІ, Рё РµС‰Рµ РІ РєСѓС‡Рµ СЃРІРѕР№СЃС‚РІ РѕР±РЅРѕРІР»СЏРµС‚ РІСЂРµРјСЏ РёР·РјРµРЅРµРЅРёСЏ, РЅРѕ С‚РµСЃС‚РёС€СЊ РµРіРѕ С‚РѕР»СЊРєРѕ РІ РѕРґРЅРѕРј NoteCategory - РЅР°РґРѕ РІРµР·РґРµ. Рђ РµС‰Рµ РїСЂРѕРІРµСЂРєР° РґРµС„РѕР»С‚РЅС‹С… Р·РЅР°С‡РµРЅРёР№
 	[Test(Description = "Note title getter/setter test")]
 	public void Title_CorrectValue()
 	{
-		// TODO: оформить все юнит-тесты в виде трёх блоков как сделано ниже: Подготовка данных Arrange, вызов тестируемой функциональности Act, и проверка правильности результата Assert
+		// TODO: + РѕС„РѕСЂРјРёС‚СЊ РІСЃРµ СЋРЅРёС‚-С‚РµСЃС‚С‹ РІ РІРёРґРµ С‚СЂС‘С… Р±Р»РѕРєРѕРІ РєР°Рє СЃРґРµР»Р°РЅРѕ РЅРёР¶Рµ: РџРѕРґРіРѕС‚РѕРІРєР° РґР°РЅРЅС‹С… Arrange, РІС‹Р·РѕРІ С‚РµСЃС‚РёСЂСѓРµРјРѕР№ С„СѓРЅРєС†РёРѕРЅР°Р»СЊРЅРѕСЃС‚Рё Act, Рё РїСЂРѕРІРµСЂРєР° РїСЂР°РІРёР»СЊРЅРѕСЃС‚Рё СЂРµР·СѓР»СЊС‚Р°С‚Р° Assert
 		// Arrange
 		var note = new Note();
 		var expected = "First Note";
@@ -25,36 +25,45 @@ public class NoteTests
 	[Test(Description = "Note text getter/setter test")]
 	public void Text_CorrectValue()
 	{
+		// Arrange
 		var note = new Note();
 		var expected = "Write you note here";
 
+		// Act
 		note.Text = "Write you note here";
 		var actual = note.Text;
 
+		// Assert
 		Assert.That(expected, Is.EqualTo(actual));
 	}
 
 	[Test(Description = "Note category getter/setter test")]
 	public void Category_CorrectValue()
 	{
+		// Arrange
 		var note = new Note();
 		var expected = NoteCategoryType.Document;
 
+		// Act
 		note.Category = NoteCategoryType.Document;
 		var actual = note.Category;
 
+		// Assert
 		Assert.That(expected, Is.EqualTo(actual));
 	}
 
 	[Test(Description = "Test of Note time modification")]
 	public void ModifiedTime_ValueChanged()
 	{
+		// Arrange
 		var note = new Note();
 		var expected = note.ModifiedTime;
 
+		// Act
 		note.Category = NoteCategoryType.Document;
 		var actual = note.ModifiedTime;
 
+		// Assert
 		Assert.That(expected, Is.LessThan(actual));
 	}
 }

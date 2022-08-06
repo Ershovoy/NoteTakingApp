@@ -37,7 +37,7 @@ namespace NoteTakingUI
 			this.NoteTextRichTextBox = new System.Windows.Forms.RichTextBox();
 			this.MainSplitContainer = new System.Windows.Forms.SplitContainer();
 			this.RemoveNoteButton = new System.Windows.Forms.Button();
-			this.ChangeNoteButton = new System.Windows.Forms.Button();
+			this.EditNoteButton = new System.Windows.Forms.Button();
 			this.CreateNoteButton = new System.Windows.Forms.Button();
 			this.NoteTitleLabel = new System.Windows.Forms.Label();
 			this.NoteModifiedDateLabel = new System.Windows.Forms.Label();
@@ -134,7 +134,7 @@ namespace NoteTakingUI
 			// MainSplitContainer.Panel1
 			// 
 			this.MainSplitContainer.Panel1.Controls.Add(this.RemoveNoteButton);
-			this.MainSplitContainer.Panel1.Controls.Add(this.ChangeNoteButton);
+			this.MainSplitContainer.Panel1.Controls.Add(this.EditNoteButton);
 			this.MainSplitContainer.Panel1.Controls.Add(this.CreateNoteButton);
 			this.MainSplitContainer.Panel1.Controls.Add(this.CategoryFilterLabel);
 			this.MainSplitContainer.Panel1.Controls.Add(this.CategoryComboBox);
@@ -167,17 +167,17 @@ namespace NoteTakingUI
 			this.RemoveNoteButton.UseVisualStyleBackColor = true;
 			this.RemoveNoteButton.Click += new System.EventHandler(this.RemoveNoteButton_Click);
 			// 
-			// ChangeNoteButton
+			// EditNoteButton
 			// 
-			this.ChangeNoteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.ChangeNoteButton.BackgroundImage = global::NoteTakingUI.Properties.Resources.EditNote;
-			this.ChangeNoteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.ChangeNoteButton.Location = new System.Drawing.Point(49, 347);
-			this.ChangeNoteButton.Name = "ChangeNoteButton";
-			this.ChangeNoteButton.Size = new System.Drawing.Size(40, 40);
-			this.ChangeNoteButton.TabIndex = 4;
-			this.ChangeNoteButton.UseVisualStyleBackColor = true;
-			this.ChangeNoteButton.Click += new System.EventHandler(this.ChangeNoteButton_Click);
+			this.EditNoteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.EditNoteButton.BackgroundImage = global::NoteTakingUI.Properties.Resources.EditNote;
+			this.EditNoteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.EditNoteButton.Location = new System.Drawing.Point(49, 347);
+			this.EditNoteButton.Name = "EditNoteButton";
+			this.EditNoteButton.Size = new System.Drawing.Size(40, 40);
+			this.EditNoteButton.TabIndex = 4;
+			this.EditNoteButton.UseVisualStyleBackColor = true;
+			this.EditNoteButton.Click += new System.EventHandler(this.EditNoteButton_Click);
 			// 
 			// CreateNoteButton
 			// 
@@ -279,7 +279,7 @@ namespace NoteTakingUI
 			this.EditNoteToolStripMenuItem.Name = "EditNoteToolStripMenuItem";
 			this.EditNoteToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
 			this.EditNoteToolStripMenuItem.Text = "Edit Note";
-			this.EditNoteToolStripMenuItem.Click += new System.EventHandler(this.ChangeNoteButton_Click);
+			this.EditNoteToolStripMenuItem.Click += new System.EventHandler(this.EditNoteButton_Click);
 			// 
 			// DeleteNoteToolStripMenuItem
 			// 
@@ -344,7 +344,7 @@ namespace NoteTakingUI
 		private Label NoteCreateDateLabel;
 		private Label NoteTitleLabel;
 		private Button RemoveNoteButton;
-		private Button ChangeNoteButton;
+		private Button EditNoteButton;
 		private Button CreateNoteButton;
 		private MenuStrip MainMenuStrip;
 		private ToolStripMenuItem FileToolStripMenuItem;

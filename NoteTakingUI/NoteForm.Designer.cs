@@ -1,6 +1,6 @@
 ﻿namespace NoteTakingUI
 {
-	partial class NoteEditForm
+	partial class NoteForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -28,7 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NoteEditForm));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NoteForm));
 			this.NoteTitleLabel = new System.Windows.Forms.Label();
 			this.NoteTitleTextBox = new System.Windows.Forms.TextBox();
 			this.NoteCategoryComboBox = new System.Windows.Forms.ComboBox();

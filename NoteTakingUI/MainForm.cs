@@ -12,11 +12,12 @@ namespace NoteTakingUI;
 
 public partial class MainForm : Form
 {
-	// TODO: неправильное использование xml-комментариев
-	// TODO: неправильный порядок членов класса
+	// TODO: + неправильное использование xml-комментариев
+	// TODO: + неправильный порядок членов класса
 	/// <summary>
-	/// Конструкторы.
+	/// Список заметок.
 	/// </summary>
+	private Notebook _notes;
 
 	/// <summary>
 	/// Конструктор формы по умолчанию.
@@ -46,10 +47,6 @@ public partial class MainForm : Form
 	}
 
 	/// <summary>
-	/// Ивенты.
-	/// </summary>
-
-	/// <summary>
 	/// Отобразить информации о приложении.
 	/// </summary>
 	private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -64,7 +61,8 @@ public partial class MainForm : Form
 	private void CreateNoteButton_Click(object sender, EventArgs e)
 	{
 		Note newNote = new();
-		NoteEditForm noteEditForm = new(newNote);
+		NoteForm noteEditForm = new();
+		noteEditForm.Note = newNote;
 		DialogResult result = noteEditForm.ShowDialog();
 		if (result == DialogResult.OK)
 		{
@@ -77,14 +75,15 @@ public partial class MainForm : Form
 	/// <summary>
 	/// Редактировать выбранную заметку.
 	/// </summary>
-	private void ChangeNoteButton_Click(object sender, EventArgs e)
+	private void EditNoteButton_Click(object sender, EventArgs e)
 	{
-		// TODO: Термин "редактировать" у тебя переводится и как Edit, и как Change. Должен быть только один правильный перевод термина. PS: Change - не переводится как "редактировать"
+		// TODO: + Термин "редактировать" у тебя переводится и как Edit, и как Change. Должен быть только один правильный перевод термина. PS: Change - не переводится как "редактировать"
 		int selectedNoteIndex = NotesListBox.SelectedIndex;
 		try
 		{
 			Note selectedNote = _notes[selectedNoteIndex];
-			NoteEditForm noteEditForm = new(selectedNote);
+			NoteForm noteEditForm = new();
+			noteEditForm.Note = selectedNote;
 			DialogResult result = noteEditForm.ShowDialog();
 			if (result == DialogResult.OK)
 			{
@@ -137,7 +136,7 @@ public partial class MainForm : Form
 	/// </summary>
 	private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
 	{
-		_notes.SortBy((NoteCategoryType)CategoryComboBox.SelectedItem);
+		_notes.SortNotesByCategory((NoteCategoryType)CategoryComboBox.SelectedItem);
 		// TODO: обновление листбокса вынести в отдельный метод и вызывать везде, где требуется обновлять
 		NotesListBox.Items.Clear();
 		for (int i = 0; i < _notes.NotesCount; ++i)
@@ -161,13 +160,4 @@ public partial class MainForm : Form
 	{
 		Close();
 	}
-
-	/// <summary>
-	/// Реализация.
-	/// </summary>
-
-	/// <summary>
-	/// Список заметок.
-	/// </summary>
-	private Notebook _notes;
 }
