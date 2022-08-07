@@ -10,11 +10,13 @@ public class Notebook
 	/// <summary>
 	/// Массив всех заметок блокнота.
 	/// </summary>
+	[JsonProperty]
 	private List<Note> _notes = new();
 
 	/// <summary>
 	/// Текущее количество заметок.
 	/// </summary>
+	[JsonIgnore]
 	public int NotesCount
 	{
 		get { return _notes.Count; }
@@ -75,25 +77,5 @@ public class Notebook
 		{
 			return y.Category.CompareTo(noteCategory);
 		});
-	}
-
-	// TODO: сохранение и загрузка блокнота - отдельная самостоятельная задача, которая тянет за собой стороннюю библиотеку. Вынести в отдельный класс NotebookSerializer
-	// TODO: класс NotebookSerializer должен определять дефолтный путь для сохранения файлов, но при этом его можно поменять через открытое свойство. Передавать путь в методы каждый раз не надо
-	/// <summary>
-	/// Сохранить заметки по указанному пути.
-	/// </summary>
-	/// <param name="filePath">Путь сохранения.</param>
-	public void Save(string filePath)
-	{
-		File.WriteAllText(filePath, JsonConvert.SerializeObject(_notes, Formatting.Indented));
-	}
-
-	/// <summary>
-	/// Загрузить заметки с указанного файла.
-	/// </summary>
-	/// <param name="filePath">Файл для загрузки.</param>
-	public void Load(string filePath)
-	{
-		_notes = JsonConvert.DeserializeObject<List<Note>>(File.ReadAllText(filePath));
 	}
 }
