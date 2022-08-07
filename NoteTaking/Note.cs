@@ -1,4 +1,6 @@
-﻿namespace NoteTaking;
+﻿using Newtonsoft.Json;
+
+namespace NoteTaking;
 
 /// <summary>
 /// Класс описывающий заметку.
@@ -26,33 +28,39 @@ public class Note
 	/// <summary>
 	/// Заголовок заметки.
 	/// </summary>
+	[JsonProperty]
 	private string _title;
 
 	/// <summary>
 	/// Основной текст заметки.
 	/// </summary>
+	[JsonProperty]
 	private string _text;
 
 	// TODO: + неправильное использование комментария
 	/// <summary>
 	/// Категория заметки.
 	/// </summary>
+	[JsonProperty]
 	private NoteCategoryType _category;
 
 	/// <summary>
 	/// Время создания заметки.
 	/// </summary>
+	[JsonProperty]
 	private DateTime _creatingTime = DateTime.Now;
 
 	/// <summary>
 	/// Время последнего изменения заметки.
 	/// </summary>
+	[JsonProperty]
 	private DateTime _modifiedTime = DateTime.Now;
 
 	// TODO: + неправильное использование комментария
 	/// <summary>
 	/// Заголовок заметки.
 	/// </summary>
+	[JsonIgnore]
 	public string Title
 	{
 		get { return _title; }
@@ -66,6 +74,7 @@ public class Note
 	/// <summary>
 	/// Содержимое заметки.
 	/// </summary>
+	[JsonIgnore]
 	public string Text
 	{
 		get { return _text; }
@@ -79,6 +88,7 @@ public class Note
 	/// <summary>
 	/// Категория заметки.
 	/// </summary>
+	[JsonIgnore]
 	public NoteCategoryType Category
 	{
 		get { return _category; }
@@ -92,6 +102,7 @@ public class Note
 	/// <summary>
 	/// Время создания заметки.
 	/// </summary>
+	[JsonIgnore]
 	public DateTime CreatingTime
 	{
 		get { return _creatingTime; }
@@ -100,6 +111,7 @@ public class Note
 	/// <summary>
 	/// Время последного изменения заметки.
 	/// </summary>
+	[JsonIgnore]
 	public DateTime ModifiedTime
 	{
 		get { return _modifiedTime; }
