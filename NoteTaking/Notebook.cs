@@ -8,20 +8,9 @@ namespace NoteTaking;
 public class Notebook
 {
 	/// <summary>
-	/// Конструкторы.
+	/// Массив всех заметок блокнота.
 	/// </summary>
-
-	/// <summary>
-	/// Конструктор по умолчанию без параметров.
-	/// </summary>
-	public Notebook()
-	{
-		_notes = new();
-	}
-
-	/// <summary>
-	/// Свойства.
-	/// </summary>
+	private List<Note> _notes = new();
 
 	/// <summary>
 	/// Текущее количество заметок.
@@ -43,8 +32,13 @@ public class Notebook
 	}
 
 	/// <summary>
-	/// Методы.
+	/// Конструктор по умолчанию без параметров.
 	/// </summary>
+	public Notebook()
+	{
+		// TODO: у тебя уже выделяется память при объявлении поля. Зачем второе выделение?
+		_notes = new();
+	}
 
 	/// <summary>
 	/// Добавить новую заметку в блокнот.
@@ -64,18 +58,27 @@ public class Notebook
 		_notes.RemoveAt(index);
 	}
 
-	public void SortBy(NoteCategoryType noteCategory)
+	// TODO: + xml-комментарии у всех членов класса
+	// TODO: + не очевидное название.
+	/// <summary>
+	/// Сортировать заметки по заданной категории.
+	/// </summary>
+	/// <param name="noteCategory">Категория заметки.</param>
+	public void SortNotesByCategory(NoteCategoryType noteCategory)
 	{
 		_notes.Sort((x, y) =>
 		{
 			return x.Category.CompareTo(y.Category);
 		});
+		// TODO: зачем дважды вызывается сортировка?
 		_notes.Sort((x, y) =>
 		{
 			return y.Category.CompareTo(noteCategory);
 		});
 	}
 
+	// TODO: сохранение и загрузка блокнота - отдельная самостоятельная задача, которая тянет за собой стороннюю библиотеку. Вынести в отдельный класс NotebookSerializer
+	// TODO: класс NotebookSerializer должен определять дефолтный путь для сохранения файлов, но при этом его можно поменять через открытое свойство. Передавать путь в методы каждый раз не надо
 	/// <summary>
 	/// Сохранить заметки по указанному пути.
 	/// </summary>
@@ -93,13 +96,4 @@ public class Notebook
 	{
 		_notes = JsonConvert.DeserializeObject<List<Note>>(File.ReadAllText(filePath));
 	}
-
-	/// <summary>
-	/// Реализация.
-	/// </summary>
-
-	/// <summary>
-	/// Массив всех заметок блокнота.
-	/// </summary>
-	private List<Note> _notes = new();
 }

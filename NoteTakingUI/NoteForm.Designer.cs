@@ -1,6 +1,6 @@
 ﻿namespace NoteTakingUI
 {
-	partial class NoteEditForm
+	partial class NoteForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NoteForm));
 			this.NoteTitleLabel = new System.Windows.Forms.Label();
 			this.NoteTitleTextBox = new System.Windows.Forms.TextBox();
 			this.NoteCategoryComboBox = new System.Windows.Forms.ComboBox();
@@ -162,6 +163,7 @@
 			this.Controls.Add(this.NoteCategoryComboBox);
 			this.Controls.Add(this.NoteTitleTextBox);
 			this.Controls.Add(this.NoteTitleLabel);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MinimumSize = new System.Drawing.Size(420, 360);
 			this.Name = "NoteEditForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
