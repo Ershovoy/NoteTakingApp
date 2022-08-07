@@ -28,22 +28,31 @@ public partial class MainForm : Form
 
 		_notes = new();
 
+		// TODO: + путь сохранения должен определятся в бизнес-логике или классе Program, но не в самой MainForm
+		// TODO: + после установки программы, путь к файлу будет лежать в папке Program Files, а к ней доступ запрещен. Должна быть работа с папкой AppData - специальной папкой для временных файлов любых программ
+		// TODO: + если какое-то значение повторяется несколько раз - надо выносить в константу или переменную
+		if (File.Exists(NotebookSerializer.Path))
+		{
+			try
+			{
+				_notes = NotebookSerializer.Load();
+			}
+			catch
+			{
+				MessageBox.Show(string.Format("Failed to load notebook from {0}, check whatever file exist or maybe corrupted.", NotebookSerializer.Path), "Error occured.");
+			}
+		}
+
+		for (int i = 0; i < _notes.NotesCount; ++i)
+		{
+			NotesListBox.Items.Add(_notes[i].Title);
+		}
+
 		foreach (NoteCategoryType noteCategoryType in Enum.GetValues(typeof(NoteCategoryType)))
 		{
 			CategoryComboBox.Items.Add(noteCategoryType);
 		}
 		CategoryComboBox.SelectedIndex = 0;
-		// TODO: путь сохранения должен определятся в бизнес-логике или классе Program, но не в самой MainForm
-		// TODO: после установки программы, путь к файлу будет лежать в папке Program Files, а к ней доступ запрещен. Должна быть работа с папкой AppData - специальной папкой для временных файлов любых программ
-		if (File.Exists(@"NotesSaveData.txt"))
-		{
-			// TODO: если какое-то значение повторяется несколько раз - надо выносить в константу или переменную
-			_notes.Load(@"NotesSaveData.txt");
-			for (int i = 0; i < _notes.NotesCount; ++i)
-			{
-				NotesListBox.Items.Add(_notes[i].Title);
-			}
-		}
 	}
 
 	/// <summary>
@@ -150,7 +159,7 @@ public partial class MainForm : Form
 	/// </summary>
 	private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
 	{
-		_notes.Save(@"NotesSaveData.txt");
+		NotebookSerializer.Save(_notes);
 	}
 
 	/// <summary>

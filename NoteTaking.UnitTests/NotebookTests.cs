@@ -55,26 +55,6 @@ public class NotebookTests
 		Assert.Throws<ArgumentOutOfRangeException>(() => { notebook[0].Title = "New title"; });
 	}
 
-	// TODO: когда будет отдельный класс для сохранения загрузки блокнота, тесты тоже вынести в отдельный класс
-	[Test(Description = "Save and load notebook test")]
-	public void SaveLoadNotebookTest()
-	{
-		// Arrange
-		var expected = new Notebook();
-
-		// Act
-		expected.AddNote(new Note("First note", "", NoteCategoryType.Default));
-		expected.AddNote(new Note("Second note", "WASD", NoteCategoryType.Home));
-		// TODO: абсолютные пути в программировании - это абсолютное зло! А если у разработчика нет раздела D? А если такого раздела не будет на билд-сервере (скорее всего)? Тесты упадут, хотя в самой тестируемой логике нет ошибок. Переделать на относительные пути
-		// TODO: в случае тестов надо создавать подпапку Test в папке bin, откуда и запускаются юнит-тесты, и сохранять все файлы там. Еще можно разделить папки Input и Output, если надо
-		expected.Save(@"D:\json.txt");
-
-		// Assert
-		var actual = new Notebook();
-		actual.Load(@"D:\json.txt");
-		// TODO: где проверка того, что загрузилось? А если метод вернул null или пустой блокнот?
-	}
-
 	[Test(Description = "Sort notebook test")]
 	public void SortNotebookTest()
 	{
