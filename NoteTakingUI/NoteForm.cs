@@ -2,7 +2,7 @@
 
 namespace NoteTakingUI;
 
-// TODO: В окне должна быть валидация на длину заголовка
+// TODO: + В окне должна быть валидация на длину заголовка
 // TODO: + именование формы поменять на NoteForm. Форма может создавать и редактировать заметки, а не только редактировать
 /// <summary>
 /// Форма для редактирования содержимого выбранной заметки.
@@ -29,10 +29,6 @@ public partial class NoteForm : Form
 			NoteTextRichTextBox.Text = _noteToEdit.Text;
 			NoteCreateDateTime.Value = _noteToEdit.CreatingTime;
 			NoteModifiedDateTime.Value = _noteToEdit.ModifiedTime;
-			foreach (NoteCategoryType noteType in Enum.GetValues(typeof(NoteCategoryType)))
-			{
-				NoteCategoryComboBox.Items.Add(noteType);
-			}
 			NoteCategoryComboBox.SelectedItem = _noteToEdit.Category;
 		}
 	}
@@ -44,7 +40,13 @@ public partial class NoteForm : Form
 	public NoteForm()
 	{
 		InitializeComponent();
+
 		Note = new Note();
+
+		foreach (NoteCategoryType noteType in Enum.GetValues(typeof(NoteCategoryType)))
+		{
+			NoteCategoryComboBox.Items.Add(noteType);
+		}
 	}
 
 	// TODO: + что за "именты"?
@@ -53,6 +55,11 @@ public partial class NoteForm : Form
 	/// </summary>
 	private void OkButton_Click(object sender, EventArgs e)
 	{
+		if (NoteTitleTextBox.Text.Length > 15)
+		{
+			MessageBox.Show("The note title must be less than 15 characters.", "Error occured.");
+			return;
+		}
 		_noteToEdit.Title = NoteTitleTextBox.Text;
 		_noteToEdit.Text = NoteTextRichTextBox.Text;
 		_noteToEdit.Category = (NoteCategoryType)NoteCategoryComboBox.SelectedItem;
