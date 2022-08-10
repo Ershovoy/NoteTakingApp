@@ -5,10 +5,10 @@ namespace NoteTakingUI;
 // TODO: + добавить иконку приложению
 // TODO: + верстка слетела, контролы за пределами формы
 // TODO: + После Show Category поставить двоеточие. В конце любыхх лейблов ставится двоеточие, если это только не подсказка
-// TODO: комбобокс на выбор категории не работает
+// TODO: + комбобокс на выбор категории не работает
 // TODO: + если заметка достаточно большая, то её нельзя пролистнуть с помощью скроллера
 // TODO: + сделать кнопки на добавление/редактирование и удаление плоскими и с пиктограммами, как на макете интерфейса
-// TODO: заметки не сортируются по дате модификации
+// TODO: + заметки не сортируются по дате модификации
 
 public partial class MainForm : Form
 {
@@ -17,7 +17,17 @@ public partial class MainForm : Form
 	/// <summary>
 	/// Список заметок.
 	/// </summary>
-	private Notebook _notes;
+	private Notebook _notesData;
+
+	/// <summary>
+	/// Список заметок для отображения на экране.
+	/// </summary>
+	private Notebook _displayedNotes;
+
+	/// <summary>
+	/// Справочная заметка.
+	/// </summary>
+	private Note _helpNote = new Note($"It's the title of this help note.", "Create your first note by clicking on the button in the lower left corner or select existed one on the left box.");
 
 	/// <summary>
 	/// Конструктор формы по умолчанию.
@@ -26,7 +36,8 @@ public partial class MainForm : Form
 	{
 		InitializeComponent();
 
-		_notes = new();
+		_notesData = new();
+		_displayedNotes = _notesData;
 
 		// TODO: + путь сохранения должен определятся в бизнес-логике или классе Program, но не в самой MainForm
 		// TODO: + после установки программы, путь к файлу будет лежать в папке Program Files, а к ней доступ запрещен. Должна быть работа с папкой AppData - специальной папкой для временных файлов любых программ
@@ -35,7 +46,7 @@ public partial class MainForm : Form
 		{
 			try
 			{
-				_notes = NotebookSerializer.Load();
+				_notesData = NotebookSerializer.Load();
 			}
 			catch
 			{
@@ -43,16 +54,40 @@ public partial class MainForm : Form
 			}
 		}
 
-		for (int i = 0; i < _notes.NotesCount; ++i)
-		{
-			NotesListBox.Items.Add(_notes[i].Title);
-		}
-
 		foreach (NoteCategoryType noteCategoryType in Enum.GetValues(typeof(NoteCategoryType)))
 		{
 			CategoryComboBox.Items.Add(noteCategoryType);
 		}
 		CategoryComboBox.SelectedIndex = 0;
+
+		DisplayNoteContent(_helpNote);
+		UpdateNoteListBox();
+	}
+
+	/// <summary>
+	/// Обновить содержимое списка заметок.
+	/// </summary>
+	private void UpdateNoteListBox()
+	{
+		_displayedNotes = _notesData.GetNotesWithCategory((NoteCategoryType)CategoryComboBox.SelectedItem);
+		NotesListBox.Items.Clear();
+		for (int i = 0; i < _displayedNotes.NotesCount; ++i)
+		{
+			NotesListBox.Items.Add(_displayedNotes[i].Title);
+		}
+	}
+
+	/// <summary>
+	/// Отобразить содержимое заданной заметки на экране.
+	/// </summary>
+	/// <param name="note">Заметка для отображения.</param>
+	private void DisplayNoteContent(Note note)
+	{
+		NoteTitleLabel.Text = note.Title;
+		NoteCategoryLabel.Text = string.Format("Category: {0}", note.Category);
+		NoteTextRichTextBox.Text = note.Text;
+		NoteCreateDateTime.Value = note.CreatingTime;
+		NoteModifiedDateTime.Value = note.ModifiedTime;
 	}
 
 	/// <summary>
@@ -75,9 +110,9 @@ public partial class MainForm : Form
 		DialogResult result = noteEditForm.ShowDialog();
 		if (result == DialogResult.OK)
 		{
-			_notes.AddNote(newNote);
-			NotesListBox.Items.Add(newNote.Title);
-			NotesListBox.SelectedIndex = _notes.NotesCount - 1;
+			_notesData.AddNote(newNote);
+			DisplayNoteContent(newNote);
+			UpdateNoteListBox();
 		}
 	}
 
@@ -90,19 +125,21 @@ public partial class MainForm : Form
 		int selectedNoteIndex = NotesListBox.SelectedIndex;
 		try
 		{
-			Note selectedNote = _notes[selectedNoteIndex];
+			Note selectedNote = _displayedNotes[selectedNoteIndex];
 			NoteForm noteEditForm = new();
 			noteEditForm.Note = selectedNote;
 			DialogResult result = noteEditForm.ShowDialog();
 			if (result == DialogResult.OK)
 			{
-				// TODO: по заданию любые изменения списка заметок должны тут же сохраняться в файл
-				NotesListBox.Items[selectedNoteIndex] = selectedNote.Title;
+				// TODO: + по заданию любые изменения списка заметок должны тут же сохраняться в файл
+				NotebookSerializer.Save(_notesData);
+				DisplayNoteContent(selectedNote);
+				UpdateNoteListBox();
 			}
 		}
-		catch (Exception exception)
+		catch
 		{
-			MessageBox.Show(exception.Message, "Error occured");
+			MessageBox.Show("Please select what note need to be edited.", "Error occured.");
 		}
 	}
 
@@ -114,12 +151,15 @@ public partial class MainForm : Form
 		int selectedNoteIndex = NotesListBox.SelectedIndex;
 		try
 		{
-			_notes.RemoveNote(selectedNoteIndex);
-			NotesListBox.Items.RemoveAt(selectedNoteIndex);
+			_displayedNotes[selectedNoteIndex].Title = "Note to delete";
+			_notesData.SortNotesByModification();
+			_notesData.RemoveNote(0);
+			NotesListBox.SelectedIndex = -1;
+			UpdateNoteListBox();
 		}
-		catch (Exception exception)
+		catch
 		{
-			MessageBox.Show(exception.Message, "Error occured");
+			MessageBox.Show("Please select what note need to be removed.", "Error occured.");
 		}
 	}
 
@@ -128,15 +168,19 @@ public partial class MainForm : Form
 	/// </summary>
 	private void NotesListBox_SelectedIndexChanged(object sender, EventArgs e)
 	{
-		// TODO: если индекс -1, то надо очищать данные на форме (например, когда пользователь удалил все заметки, или нет заметок, подходящих под выбранную категорию
+		// TODO: + если индекс -1, то надо очищать данные на форме (например, когда пользователь удалил все заметки, или нет заметок, подходящих под выбранную категорию
 		if (NotesListBox.SelectedIndex != -1)
 		{
-			Note selectedNote = _notes[NotesListBox.SelectedIndex];
-			NoteTitleLabel.Text = selectedNote.Title;
-			NoteCategoryLabel.Text = string.Format("Category: {0}", selectedNote.Category);
-			NoteTextRichTextBox.Text = selectedNote.Text;
-			NoteCreateDateTime.Value = selectedNote.CreatingTime;
-			NoteModifiedDateTime.Value = selectedNote.ModifiedTime;
+			Note selectedNote = _displayedNotes[NotesListBox.SelectedIndex];
+			DisplayNoteContent(selectedNote);
+		}
+		else
+		{
+			NoteTitleLabel.Text = "";
+			NoteCategoryLabel.Text = "Category:";
+			NoteTextRichTextBox.Text = "";
+			NoteCreateDateTime.Value = DateTime.Now;
+			NoteModifiedDateTime.Value = DateTime.Now;
 		}
 	}
 
@@ -145,13 +189,8 @@ public partial class MainForm : Form
 	/// </summary>
 	private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
 	{
-		_notes.SortNotesByCategory((NoteCategoryType)CategoryComboBox.SelectedItem);
-		// TODO: обновление листбокса вынести в отдельный метод и вызывать везде, где требуется обновлять
-		NotesListBox.Items.Clear();
-		for (int i = 0; i < _notes.NotesCount; ++i)
-		{
-			NotesListBox.Items.Add(_notes[i].Title);
-		}
+		// TODO: + обновление листбокса вынести в отдельный метод и вызывать везде, где требуется обновлять
+		UpdateNoteListBox();
 	}
 
 	/// <summary>
@@ -159,7 +198,7 @@ public partial class MainForm : Form
 	/// </summary>
 	private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
 	{
-		NotebookSerializer.Save(_notes);
+		NotebookSerializer.Save(_notesData);
 	}
 
 	/// <summary>

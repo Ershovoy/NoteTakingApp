@@ -6,7 +6,12 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>ApplicationImage.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="ApplicationImage.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\NoteTaking\NoteTaking.csproj" />

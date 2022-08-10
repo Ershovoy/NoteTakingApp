@@ -11,7 +11,7 @@ public class Notebook
 	/// Массив всех заметок блокнота.
 	/// </summary>
 	[JsonProperty]
-	private List<Note> _notes = new();
+	private List<Note> _notes;
 
 	/// <summary>
 	/// Текущее количество заметок.
@@ -29,8 +29,16 @@ public class Notebook
 	/// <returns>Заметка по заданному индексу.</returns>
 	public Note this[int index]
 	{
-		get { return _notes[index]; }
-		set { _notes[index] = value; }
+		get 
+		{ 
+			SortNotesByModification();
+			return _notes[index];
+		}
+		set 
+		{ 
+			_notes[index] = value;
+			SortNotesByModification();
+		}
 	}
 
 	/// <summary>
@@ -38,7 +46,7 @@ public class Notebook
 	/// </summary>
 	public Notebook()
 	{
-		// TODO: у тебя уже выделяется память при объявлении поля. Зачем второе выделение?
+		// TODO: + у тебя уже выделяется память при объявлении поля. Зачем второе выделение?
 		_notes = new();
 	}
 
@@ -49,6 +57,7 @@ public class Notebook
 	public void AddNote(Note note)
 	{
 		_notes.Add(note);
+		SortNotesByModification();
 	}
 
 	/// <summary>
@@ -58,24 +67,39 @@ public class Notebook
 	public void RemoveNote(int index)
 	{
 		_notes.RemoveAt(index);
+		SortNotesByModification();
+	}
+
+	/// <summary>
+	/// Сортировка заметок по времени их последнего изменения.
+	/// </summary>
+	public void SortNotesByModification()
+	{
+		_notes.Sort((t1, t2) => DateTime.Compare(t2.ModifiedTime, t1.ModifiedTime));
 	}
 
 	// TODO: + xml-комментарии у всех членов класса
 	// TODO: + не очевидное название.
 	/// <summary>
-	/// Сортировать заметки по заданной категории.
+	/// Получить список заметок с заданной категорией.
 	/// </summary>
 	/// <param name="noteCategory">Категория заметки.</param>
-	public void SortNotesByCategory(NoteCategoryType noteCategory)
+	public Notebook GetNotesWithCategory(NoteCategoryType noteCategory)
 	{
-		_notes.Sort((x, y) =>
+		if (noteCategory == NoteCategoryType.Default)
 		{
-			return x.Category.CompareTo(y.Category);
-		});
-		// TODO: зачем дважды вызывается сортировка?
-		_notes.Sort((x, y) =>
+			return this;
+		}
+
+		// TODO: + зачем дважды вызывается сортировка?
+		Notebook result = new();
+		foreach (Note note in _notes)
 		{
-			return y.Category.CompareTo(noteCategory);
-		});
+			if (note.Category == noteCategory)
+			{
+				result.AddNote(note);
+			}
+		}
+		return result;
 	}
 }

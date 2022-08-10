@@ -20,12 +20,9 @@ public class NotebookSerializerTests
 		NotebookSerializer.Path = @"..\..\Tests\NotebookData.txt";
 		NotebookSerializer.Save(expected);
 		var actual = NotebookSerializer.Load();
-		NotebookSerializer.Path = @"..\..\Tests\NotebookData2.txt";
-		NotebookSerializer.Save(actual);
+
 		// Assert
-		// TODO: + где проверка того, что загрузилось? А если метод вернул null или пустой блокнот?
-		//Assert.That(expected.NotesCount, Is.EqualTo(actual.NotesCount));
-		//Assert.That(expected, Is.EqualTo(actual));
-		Assert.That(expected[1], Is.EqualTo(actual[1]));
+		// TODO: ? где проверка того, что загрузилось? А если метод вернул null или пустой блокнот?
+		Assert.That(expected, Is.EqualTo(actual));
 	}
 }

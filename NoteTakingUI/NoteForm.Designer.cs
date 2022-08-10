@@ -147,8 +147,9 @@
 			this.CancelButton.UseVisualStyleBackColor = true;
 			this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
 			// 
-			// NoteEditForm
+			// NoteForm
 			// 
+			this.AcceptButton = this.OkButton;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(402, 313);
@@ -165,7 +166,7 @@
 			this.Controls.Add(this.NoteTitleLabel);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MinimumSize = new System.Drawing.Size(420, 360);
-			this.Name = "NoteEditForm";
+			this.Name = "NoteForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Edit Note";
 			this.ResumeLayout(false);
