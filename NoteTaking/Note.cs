@@ -7,9 +7,6 @@ namespace NoteTaking;
 /// </summary>
 public class Note
 {
-	// TODO: + порядом членов класса: константы, static и readonly поля, обычные поля, свойства, конструкторы, открытые методы, закрытые методы, обработчики. Переделать порядок членов класса во всём решении 
-	// TODO: + xml-комментарии не используются сами по себе, только перед методом, классом, полем
-	// TODO: + static readonly - это const
 	/// <summary>
 	/// Стандартный заголовок заметки.
 	/// </summary>
@@ -25,10 +22,11 @@ public class Note
 	/// </summary>
 	private const NoteCategoryType _defaultNoteCategory = NoteCategoryType.Default;
 
-	/// <summary>
-	/// Заголовок заметки.
-	/// </summary>
-	[JsonProperty]
+    // TODO: зачем делать все поля как JsonProperty, но при этом игнорировать все свойства? Куча лишних атрибутов, можно реализовать без них. Например, сделав закрытый конструктор для сериализации
+    /// <summary>
+    /// Заголовок заметки.
+    /// </summary>
+    [JsonProperty]
 	private string _title;
 
 	/// <summary>
@@ -56,11 +54,11 @@ public class Note
 	[JsonProperty]
 	private DateTime _modifiedTime = DateTime.Now;
 
-	// TODO: + неправильное использование комментария
-	/// <summary>
-	/// Заголовок заметки.
-	/// </summary>
-	[JsonIgnore]
+    // TODO: класс должен сам валидировать поле на длину. Где проверка?
+    /// <summary>
+    /// Заголовок заметки.
+    /// </summary>
+    [JsonIgnore]
 	public string Title
 	{
 		get { return _title; }
@@ -99,10 +97,11 @@ public class Note
 		}
 	}
 
-	/// <summary>
-	/// Время создания заметки.
-	/// </summary>
-	[JsonIgnore]
+    // TODO: в интерфейсе свойство называется Created. Где правда? Исправить, сделать единообразно везде
+    /// <summary>
+    /// Время создания заметки.
+    /// </summary>
+    [JsonIgnore]
 	public DateTime CreatingTime
 	{
 		get { return _creatingTime; }
@@ -117,14 +116,14 @@ public class Note
 		get { return _modifiedTime; }
 	}
 
-	// TODO: + три конструктора можно было бы реализовать одним методом с параметрами по умолчанию или явным наследованием от конструктора
-	/// <summary>
-	/// Создание заметки по заданному заголовку, содержимому и её категории.
-	/// </summary>
-	/// <param name="title">Заголовок заметки.</param>
-	/// <param name="text">Содержимое заметки.</param>
-	/// <param name="noteCategory">Категория заметки.</param>
-	public Note(string title = _defaultNoteTitle, string text = _defaultNoteText, NoteCategoryType noteCategory = _defaultNoteCategory)
+    /// <summary>
+    /// Создание заметки по заданному заголовку, содержимому и её категории.
+    /// </summary>
+    /// <param name="title">Заголовок заметки.</param>
+    /// <param name="text">Содержимое заметки.</param>
+    /// <param name="noteCategory">Категория заметки.</param>
+	// TODO: не должно быть строк длиннее 100 символов, исправить
+    public Note(string title = _defaultNoteTitle, string text = _defaultNoteText, NoteCategoryType noteCategory = _defaultNoteCategory)
 	{
 		Title = title;
 		Text = text;

@@ -7,10 +7,13 @@ namespace NoteTaking;
 /// </summary>
 public class Notebook
 {
-	/// <summary>
-	/// Массив всех заметок блокнота.
-	/// </summary>
-	[JsonProperty]
+    // TODO: по заданию, программа должна еще сохранять и последнюю выбранную заметку, а при запуске открывать её снова.
+
+    // TODO: опять лишние атрибуты у полей и свойств
+    /// <summary>
+    /// Массив всех заметок блокнота.
+    /// </summary>
+    [JsonProperty]
 	private List<Note> _notes;
 
 	/// <summary>
@@ -30,8 +33,9 @@ public class Notebook
 	public Note this[int index]
 	{
 		get 
-		{ 
-			SortNotesByModification();
+		{
+            // TODO: зачем здесь вызывается сортировка?
+            SortNotesByModification();
 			return _notes[index];
 		}
 		set 
@@ -75,11 +79,9 @@ public class Notebook
 	/// </summary>
 	public void SortNotesByModification()
 	{
-		_notes.Sort((t1, t2) => DateTime.Compare(t2.ModifiedTime, t1.ModifiedTime));
+        _notes.Sort((t1, t2) => DateTime.Compare(t2.ModifiedTime, t1.ModifiedTime));
 	}
 
-	// TODO: + xml-комментарии у всех членов класса
-	// TODO: + не очевидное название.
 	/// <summary>
 	/// Получить список заметок с заданной категорией.
 	/// </summary>
@@ -91,8 +93,9 @@ public class Notebook
 			return this;
 		}
 
-		// TODO: + зачем дважды вызывается сортировка?
-		Notebook result = new();
+        // TODO:  блокнот создает экземпляры других блокнотов? Неправильно.
+		// Возвращаться должен обычный список заметок, но не блокнот.
+        Notebook result = new();
 		foreach (Note note in _notes)
 		{
 			if (note.Category == noteCategory)
