@@ -7,11 +7,11 @@ namespace NoteTakingUI;
 /// </summary>
 public partial class NoteForm : Form
 {
-    // TODO: зачем фраза ToEdit? 1) поле именуется как и свойство. Свойство переименовал, почему поле оставил? Не надо нагромождать названия лишними словами
-    /// <summary>
-    /// Текущая выбранная заметка для редактирования в этой форме.
-    /// </summary>
-    private Note _noteToEdit;
+	// TODO: зачем фраза ToEdit? 1) поле именуется как и свойство. Свойство переименовал, почему поле оставил? Не надо нагромождать названия лишними словами
+	/// <summary>
+	/// Текущая выбранная заметка для редактирования в этой форме.
+	/// </summary>
+	private Note _noteToEdit;
 
 	// TODO: + просто Note
 	/// <summary>
@@ -54,8 +54,8 @@ public partial class NoteForm : Form
 	/// </summary>
 	private void OkButton_Click(object sender, EventArgs e)
 	{
-        // TODO: валидация должна в бизнес-логике, а форма должна просто ловить исключения с ошибками и показывать из них текст пользователю.
-        if (NoteTitleTextBox.Text.Length > 15)
+		// TODO: валидация должна в бизнес-логике, а форма должна просто ловить исключения с ошибками и показывать из них текст пользователю.
+		if (NoteTitleTextBox.Text.Length > 15)
 		{
 			MessageBox.Show("The note title must be less than 15 characters.", "Error occured.");
 			return;
