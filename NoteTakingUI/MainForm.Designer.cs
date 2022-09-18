@@ -46,9 +46,9 @@
 			this.CategoryComboBox = new System.Windows.Forms.ComboBox();
 			this.CategoryFilterLabel = new System.Windows.Forms.Label();
 			this.NoteTextRichTextBox = new System.Windows.Forms.RichTextBox();
-			this.NoteModifiedDateTime = new System.Windows.Forms.DateTimePicker();
+			this.NoteModificationDateTime = new System.Windows.Forms.DateTimePicker();
 			this.NoteModifiedDateLabel = new System.Windows.Forms.Label();
-			this.NoteCreateDateTime = new System.Windows.Forms.DateTimePicker();
+			this.NoteCreationDateTime = new System.Windows.Forms.DateTimePicker();
 			this.NoteCreateDateLabel = new System.Windows.Forms.Label();
 			this.NoteCategoryLabel = new System.Windows.Forms.Label();
 			this.NoteTitleLabel = new System.Windows.Forms.Label();
@@ -68,7 +68,6 @@
             this.HelpToolStripMenuItem});
 			this.MainMenuStrip.Location = new System.Drawing.Point(0, 0);
 			this.MainMenuStrip.Name = "MainMenuStrip";
-			this.MainMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
 			this.MainMenuStrip.Size = new System.Drawing.Size(624, 24);
 			this.MainMenuStrip.TabIndex = 0;
 			this.MainMenuStrip.Text = "MainMenuStrip";
@@ -155,9 +154,9 @@
 			// MainSplitContainer.Panel2
 			// 
 			this.MainSplitContainer.Panel2.Controls.Add(this.NoteTextRichTextBox);
-			this.MainSplitContainer.Panel2.Controls.Add(this.NoteModifiedDateTime);
+			this.MainSplitContainer.Panel2.Controls.Add(this.NoteModificationDateTime);
 			this.MainSplitContainer.Panel2.Controls.Add(this.NoteModifiedDateLabel);
-			this.MainSplitContainer.Panel2.Controls.Add(this.NoteCreateDateTime);
+			this.MainSplitContainer.Panel2.Controls.Add(this.NoteCreationDateTime);
 			this.MainSplitContainer.Panel2.Controls.Add(this.NoteCreateDateLabel);
 			this.MainSplitContainer.Panel2.Controls.Add(this.NoteCategoryLabel);
 			this.MainSplitContainer.Panel2.Controls.Add(this.NoteTitleLabel);
@@ -248,14 +247,14 @@
 			this.NoteTextRichTextBox.TabIndex = 6;
 			this.NoteTextRichTextBox.Text = "";
 			// 
-			// NoteModifiedDateTime
+			// NoteModificationDateTime
 			// 
-			this.NoteModifiedDateTime.Enabled = false;
-			this.NoteModifiedDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-			this.NoteModifiedDateTime.Location = new System.Drawing.Point(220, 50);
-			this.NoteModifiedDateTime.Name = "NoteModifiedDateTime";
-			this.NoteModifiedDateTime.Size = new System.Drawing.Size(90, 23);
-			this.NoteModifiedDateTime.TabIndex = 5;
+			this.NoteModificationDateTime.Enabled = false;
+			this.NoteModificationDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+			this.NoteModificationDateTime.Location = new System.Drawing.Point(220, 50);
+			this.NoteModificationDateTime.Name = "NoteModificationDateTime";
+			this.NoteModificationDateTime.Size = new System.Drawing.Size(90, 23);
+			this.NoteModificationDateTime.TabIndex = 5;
 			// 
 			// NoteModifiedDateLabel
 			// 
@@ -266,14 +265,14 @@
 			this.NoteModifiedDateLabel.TabIndex = 4;
 			this.NoteModifiedDateLabel.Text = "Modified:";
 			// 
-			// NoteCreateDateTime
+			// NoteCreationDateTime
 			// 
-			this.NoteCreateDateTime.Enabled = false;
-			this.NoteCreateDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-			this.NoteCreateDateTime.Location = new System.Drawing.Point(60, 50);
-			this.NoteCreateDateTime.Name = "NoteCreateDateTime";
-			this.NoteCreateDateTime.Size = new System.Drawing.Size(90, 23);
-			this.NoteCreateDateTime.TabIndex = 3;
+			this.NoteCreationDateTime.Enabled = false;
+			this.NoteCreationDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+			this.NoteCreationDateTime.Location = new System.Drawing.Point(60, 50);
+			this.NoteCreationDateTime.Name = "NoteCreationDateTime";
+			this.NoteCreationDateTime.Size = new System.Drawing.Size(90, 23);
+			this.NoteCreationDateTime.TabIndex = 3;
 			// 
 			// NoteCreateDateLabel
 			// 
@@ -350,9 +349,9 @@
 		private Label NoteTitleLabel;
 		private Label NoteCategoryLabel;
 		private Label NoteCreateDateLabel;
-		private DateTimePicker NoteCreateDateTime;
+		private DateTimePicker NoteCreationDateTime;
 		private Label NoteModifiedDateLabel;
-		private DateTimePicker NoteModifiedDateTime;
+		private DateTimePicker NoteModificationDateTime;
 		private RichTextBox NoteTextRichTextBox;
 	}
 }

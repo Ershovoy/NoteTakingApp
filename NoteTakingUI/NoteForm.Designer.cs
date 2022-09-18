@@ -34,9 +34,9 @@
 			this.NoteCategoryLabel = new System.Windows.Forms.Label();
 			this.NoteCategoryComboBox = new System.Windows.Forms.ComboBox();
 			this.NoteCreateDateLabel = new System.Windows.Forms.Label();
-			this.NoteCreateDateTime = new System.Windows.Forms.DateTimePicker();
+			this.NoteCreationDateTime = new System.Windows.Forms.DateTimePicker();
 			this.ModifiedDateLabel = new System.Windows.Forms.Label();
-			this.NoteModifiedDateTime = new System.Windows.Forms.DateTimePicker();
+			this.NoteModificationDateTime = new System.Windows.Forms.DateTimePicker();
 			this.NoteTextRichTextBox = new System.Windows.Forms.RichTextBox();
 			this.OkButton = new System.Windows.Forms.Button();
 			this.CancelButton = new System.Windows.Forms.Button();
@@ -53,6 +53,8 @@
 			// 
 			// NoteTitleTextBox
 			// 
+			this.NoteTitleTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.NoteTitleTextBox.Location = new System.Drawing.Point(76, 12);
 			this.NoteTitleTextBox.Name = "NoteTitleTextBox";
 			this.NoteTitleTextBox.Size = new System.Drawing.Size(250, 23);
@@ -85,14 +87,14 @@
 			this.NoteCreateDateLabel.TabIndex = 4;
 			this.NoteCreateDateLabel.Text = "Created:";
 			// 
-			// NoteCreateDateTime
+			// NoteCreationDateTime
 			// 
-			this.NoteCreateDateTime.Enabled = false;
-			this.NoteCreateDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-			this.NoteCreateDateTime.Location = new System.Drawing.Point(76, 70);
-			this.NoteCreateDateTime.Name = "NoteCreateDateTime";
-			this.NoteCreateDateTime.Size = new System.Drawing.Size(90, 23);
-			this.NoteCreateDateTime.TabIndex = 5;
+			this.NoteCreationDateTime.Enabled = false;
+			this.NoteCreationDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+			this.NoteCreationDateTime.Location = new System.Drawing.Point(76, 70);
+			this.NoteCreationDateTime.Name = "NoteCreationDateTime";
+			this.NoteCreationDateTime.Size = new System.Drawing.Size(90, 23);
+			this.NoteCreationDateTime.TabIndex = 5;
 			// 
 			// ModifiedDateLabel
 			// 
@@ -103,14 +105,14 @@
 			this.ModifiedDateLabel.TabIndex = 6;
 			this.ModifiedDateLabel.Text = "Modified:";
 			// 
-			// NoteModifiedDateTime
+			// NoteModificationDateTime
 			// 
-			this.NoteModifiedDateTime.Enabled = false;
-			this.NoteModifiedDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-			this.NoteModifiedDateTime.Location = new System.Drawing.Point(236, 70);
-			this.NoteModifiedDateTime.Name = "NoteModifiedDateTime";
-			this.NoteModifiedDateTime.Size = new System.Drawing.Size(90, 23);
-			this.NoteModifiedDateTime.TabIndex = 7;
+			this.NoteModificationDateTime.Enabled = false;
+			this.NoteModificationDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+			this.NoteModificationDateTime.Location = new System.Drawing.Point(236, 70);
+			this.NoteModificationDateTime.Name = "NoteModificationDateTime";
+			this.NoteModificationDateTime.Size = new System.Drawing.Size(90, 23);
+			this.NoteModificationDateTime.TabIndex = 7;
 			// 
 			// NoteTextRichTextBox
 			// 
@@ -153,9 +155,9 @@
 			this.Controls.Add(this.CancelButton);
 			this.Controls.Add(this.OkButton);
 			this.Controls.Add(this.NoteTextRichTextBox);
-			this.Controls.Add(this.NoteModifiedDateTime);
+			this.Controls.Add(this.NoteModificationDateTime);
 			this.Controls.Add(this.ModifiedDateLabel);
-			this.Controls.Add(this.NoteCreateDateTime);
+			this.Controls.Add(this.NoteCreationDateTime);
 			this.Controls.Add(this.NoteCreateDateLabel);
 			this.Controls.Add(this.NoteCategoryComboBox);
 			this.Controls.Add(this.NoteCategoryLabel);
@@ -178,9 +180,9 @@
 		private Label NoteCategoryLabel;
 		private ComboBox NoteCategoryComboBox;
 		private Label NoteCreateDateLabel;
-		private DateTimePicker NoteCreateDateTime;
+		private DateTimePicker NoteCreationDateTime;
 		private Label ModifiedDateLabel;
-		private DateTimePicker NoteModifiedDateTime;
+		private DateTimePicker NoteModificationDateTime;
 		private RichTextBox NoteTextRichTextBox;
 		private Button OkButton;
 		private Button CancelButton;

@@ -9,7 +9,7 @@ public class Notebook
 {
     // TODO: по заданию, программа должна еще сохранять и последнюю выбранную заметку, а при запуске открывать её снова.
 
-    // TODO: опять лишние атрибуты у полей и свойств
+    // TODO: ? опять лишние атрибуты у полей и свойств
     /// <summary>
     /// Массив всех заметок блокнота.
     /// </summary>
@@ -34,8 +34,8 @@ public class Notebook
 	{
 		get 
 		{
-            // TODO: зачем здесь вызывается сортировка?
-            SortNotesByModification();
+			// TODO: зачем здесь вызывается сортировка?
+			SortNotesByModification();
 			return _notes[index];
 		}
 		set 
@@ -79,21 +79,21 @@ public class Notebook
 	/// </summary>
 	public void SortNotesByModification()
 	{
-        _notes.Sort((t1, t2) => DateTime.Compare(t2.ModifiedTime, t1.ModifiedTime));
+        _notes.Sort((t1, t2) => DateTime.Compare(t2.ModificationTime, t1.ModificationTime));
 	}
 
 	/// <summary>
 	/// Получить список заметок с заданной категорией.
 	/// </summary>
 	/// <param name="noteCategory">Категория заметки.</param>
-	public Notebook GetNotesWithCategory(NoteCategoryType noteCategory)
+	public Notebook GetNotesWithCategory(NoteCategory noteCategory)
 	{
-		if (noteCategory == NoteCategoryType.Default)
+		if (noteCategory == NoteCategory.Undefined)
 		{
 			return this;
 		}
 
-        // TODO:  блокнот создает экземпляры других блокнотов? Неправильно.
+        // TODO: => блокнот создает экземпляры других блокнотов? Неправильно.
 		// Возвращаться должен обычный список заметок, но не блокнот.
         Notebook result = new();
 		foreach (Note note in _notes)

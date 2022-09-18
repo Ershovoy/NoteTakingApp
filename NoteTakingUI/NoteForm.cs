@@ -7,11 +7,11 @@ namespace NoteTakingUI;
 /// </summary>
 public partial class NoteForm : Form
 {
-	// TODO: зачем фраза ToEdit? 1) поле именуется как и свойство. Свойство переименовал, почему поле оставил? Не надо нагромождать названия лишними словами
+	// TODO: + зачем фраза ToEdit? 1) поле именуется как и свойство. Свойство переименовал, почему поле оставил? Не надо нагромождать названия лишними словами
 	/// <summary>
 	/// Текущая выбранная заметка для редактирования в этой форме.
 	/// </summary>
-	private Note _noteToEdit;
+	private Note _note;
 
 	// TODO: + просто Note
 	/// <summary>
@@ -19,16 +19,16 @@ public partial class NoteForm : Form
 	/// </summary>
 	public Note Note
 	{
-		get { return _noteToEdit; }
+		get { return _note; }
 		set
 		{
-			_noteToEdit = value;
+			_note = value;
 
-			NoteTitleTextBox.Text = _noteToEdit.Title;
-			NoteTextRichTextBox.Text = _noteToEdit.Text;
-			NoteCreateDateTime.Value = _noteToEdit.CreatingTime;
-			NoteModifiedDateTime.Value = _noteToEdit.ModifiedTime;
-			NoteCategoryComboBox.SelectedItem = _noteToEdit.Category;
+			NoteTitleTextBox.Text = _note.Title;
+			NoteTextRichTextBox.Text = _note.Text;
+			NoteCreationDateTime.Value = _note.CreationTime;
+			NoteModificationDateTime.Value = _note.ModificationTime;
+			NoteCategoryComboBox.SelectedItem = _note.Category;
 		}
 	}
 
@@ -42,7 +42,7 @@ public partial class NoteForm : Form
 
 		Note = new Note();
 
-		foreach (NoteCategoryType noteType in Enum.GetValues(typeof(NoteCategoryType)))
+		foreach (NoteCategory noteType in Enum.GetValues(typeof(NoteCategory)))
 		{
 			NoteCategoryComboBox.Items.Add(noteType);
 		}
@@ -54,15 +54,18 @@ public partial class NoteForm : Form
 	/// </summary>
 	private void OkButton_Click(object sender, EventArgs e)
 	{
-		// TODO: валидация должна в бизнес-логике, а форма должна просто ловить исключения с ошибками и показывать из них текст пользователю.
-		if (NoteTitleTextBox.Text.Length > 15)
+		// TODO: + валидация должна в бизнес-логике, а форма должна просто ловить исключения с ошибками и показывать из них текст пользователю.
+		try
 		{
-			MessageBox.Show("The note title must be less than 15 characters.", "Error occured.");
+			_note.Title = NoteTitleTextBox.Text;
+		}
+		catch (ArgumentException exception)
+		{
+			MessageBox.Show(exception.Message, "Error occured.");
 			return;
 		}
-		_noteToEdit.Title = NoteTitleTextBox.Text;
-		_noteToEdit.Text = NoteTextRichTextBox.Text;
-		_noteToEdit.Category = (NoteCategoryType)NoteCategoryComboBox.SelectedItem;
+		_note.Text = NoteTextRichTextBox.Text;
+		_note.Category = (NoteCategory)NoteCategoryComboBox.SelectedItem;
 
 		DialogResult = DialogResult.OK;
 		Close();

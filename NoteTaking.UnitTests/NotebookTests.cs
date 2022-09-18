@@ -46,7 +46,7 @@ public class NotebookTests
 	{
 		// Arrange
 		var notebook = new Notebook();
-		var expected = new Note("First note", "WASD", NoteCategoryType.Home);
+		var expected = new Note("First note", "WASD", NoteCategory.Home);
 
 		// Act
 		notebook.AddNote(expected);
@@ -63,7 +63,7 @@ public class NotebookTests
 		var notebook = new Notebook();
 
 		// Act
-		notebook.AddNote(new Note("Second note", "WASD", NoteCategoryType.Home));
+		notebook.AddNote(new Note("Second note", "WASD", NoteCategory.Home));
 		notebook.RemoveNote(0);
 
 		// Assert
@@ -75,10 +75,10 @@ public class NotebookTests
 	{
 		// Arrange
 		var notebook = new Notebook();
-		notebook.AddNote(new Note("First note", "", NoteCategoryType.Default));
-		notebook.AddNote(new Note("Second note", "", NoteCategoryType.Home));
-		notebook.AddNote(new Note("Third note", "", NoteCategoryType.Default));
-		var expected = new Note("Third note", "", NoteCategoryType.Default);
+		notebook.AddNote(new Note("First note", "", NoteCategory.Undefined));
+		notebook.AddNote(new Note("Second note", "", NoteCategory.Home));
+		notebook.AddNote(new Note("Third note", "", NoteCategory.Undefined));
+		var expected = new Note("Third note", "", NoteCategory.Undefined);
 
 		// Act
 		var actual = notebook[0];
@@ -94,17 +94,17 @@ public class NotebookTests
 	{
 		// Arrange
 		var notebook = new Notebook();
-		notebook.AddNote(new Note("First note", "", NoteCategoryType.Default));
-		notebook.AddNote(new Note("Second note", "", NoteCategoryType.Home));
-		notebook.AddNote(new Note("Third note", "", NoteCategoryType.Default));
-		notebook.AddNote(new Note("Fourth note", "", NoteCategoryType.Home));
-		notebook.AddNote(new Note("Fifth note", "", NoteCategoryType.Document));
+		notebook.AddNote(new Note("First note", "", NoteCategory.Undefined));
+		notebook.AddNote(new Note("Second note", "", NoteCategory.Home));
+		notebook.AddNote(new Note("Third note", "", NoteCategory.Undefined));
+		notebook.AddNote(new Note("Fourth note", "", NoteCategory.Home));
+		notebook.AddNote(new Note("Fifth note", "", NoteCategory.Document));
 		var expected1 = notebook[1];
 		var expected2 = notebook[3];
 
 		// TODO: + сортировка меняет порядок целой коллекции, надо проверять что вся коллекция поменялась.
 		// Act
-		var actual = notebook.GetNotesWithCategory(NoteCategoryType.Home);
+		var actual = notebook.GetNotesWithCategory(NoteCategory.Home);
 
 		// Assert
 		// TODO: + почему ты этим ассертом уверен, что expected и actual - это действительно одна и та же заметка? А если это 1 и 3 заметки? Они же одной категории. Неправильная логика проверки результата
