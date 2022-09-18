@@ -117,6 +117,7 @@ public partial class MainForm : Form
 		if (result == DialogResult.OK)
 		{
 			_notebookData.AddNote(newNote);
+			NotebookSerializer.Save(_notebookData);
 			DisplayNoteContent(newNote);
 			UpdateNoteListBox();
 		}
@@ -168,7 +169,8 @@ public partial class MainForm : Form
 		_notebookData.RemoveNote(0);
 		NotesListBox.SelectedIndex = -1;
 		UpdateNoteListBox();
-		// TODO: Нет пересохранения после удаления заметки - данные ведь изменились
+		// TODO: + Нет пересохранения после удаления заметки - данные ведь изменились
+		NotebookSerializer.Save(_notebookData);
 	}
 
 	/// <summary>
