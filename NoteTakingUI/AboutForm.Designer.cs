@@ -32,9 +32,9 @@
 			this.AppTitleLabel = new System.Windows.Forms.Label();
 			this.AppVersionLabel = new System.Windows.Forms.Label();
 			this.AppAuthorLabel = new System.Windows.Forms.Label();
-			this.CopyrightLabel = new System.Windows.Forms.Label();
-			this.GitHubLinkLabel = new System.Windows.Forms.LinkLabel();
 			this.GitHubLabel = new System.Windows.Forms.Label();
+			this.GitHubLinkLabel = new System.Windows.Forms.LinkLabel();
+			this.CopyrightLabel = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// AppTitleLabel
@@ -43,66 +43,65 @@
 			this.AppTitleLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.AppTitleLabel.Location = new System.Drawing.Point(12, 9);
 			this.AppTitleLabel.Name = "AppTitleLabel";
-			this.AppTitleLabel.Size = new System.Drawing.Size(242, 28);
-			this.AppTitleLabel.TabIndex = 7;
+			this.AppTitleLabel.Size = new System.Drawing.Size(196, 21);
+			this.AppTitleLabel.TabIndex = 0;
 			this.AppTitleLabel.Text = "Note Taking Application";
 			// 
 			// AppVersionLabel
 			// 
 			this.AppVersionLabel.AutoSize = true;
-			this.AppVersionLabel.Location = new System.Drawing.Point(12, 37);
+			this.AppVersionLabel.Location = new System.Drawing.Point(12, 30);
 			this.AppVersionLabel.Name = "AppVersionLabel";
-			this.AppVersionLabel.Size = new System.Drawing.Size(46, 20);
-			this.AppVersionLabel.TabIndex = 8;
-			this.AppVersionLabel.Text = "v0.2.0";
+			this.AppVersionLabel.Size = new System.Drawing.Size(37, 15);
+			this.AppVersionLabel.TabIndex = 1;
+			this.AppVersionLabel.Text = "v0.3.0";
 			// 
 			// AppAuthorLabel
 			// 
 			this.AppAuthorLabel.AutoSize = true;
-			this.AppAuthorLabel.Location = new System.Drawing.Point(12, 96);
+			this.AppAuthorLabel.Location = new System.Drawing.Point(12, 82);
 			this.AppAuthorLabel.Name = "AppAuthorLabel";
-			this.AppAuthorLabel.Size = new System.Drawing.Size(131, 20);
-			this.AppAuthorLabel.TabIndex = 9;
+			this.AppAuthorLabel.Size = new System.Drawing.Size(106, 15);
+			this.AppAuthorLabel.TabIndex = 2;
 			this.AppAuthorLabel.Text = "Author: Ilya Ershov";
-			// 
-			// CopyrightLabel
-			// 
-			this.CopyrightLabel.AutoSize = true;
-			this.CopyrightLabel.Location = new System.Drawing.Point(249, 164);
-			this.CopyrightLabel.Name = "CopyrightLabel";
-			this.CopyrightLabel.Size = new System.Drawing.Size(41, 20);
-			this.CopyrightLabel.TabIndex = 10;
-			this.CopyrightLabel.Text = "2022";
-			// 
-			// GitHubLinkLabel
-			// 
-			this.GitHubLinkLabel.AutoSize = true;
-			this.GitHubLinkLabel.Location = new System.Drawing.Point(74, 116);
-			this.GitHubLinkLabel.Name = "GitHubLinkLabel";
-			this.GitHubLinkLabel.Size = new System.Drawing.Size(177, 20);
-			this.GitHubLinkLabel.TabIndex = 11;
-			this.GitHubLinkLabel.TabStop = true;
-			this.GitHubLinkLabel.Tag = "";
-			this.GitHubLinkLabel.Text = "Ershovoy/NoteTakingApp";
-			this.GitHubLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.GitHubLinkLabel_LinkClicked);
 			// 
 			// GitHubLabel
 			// 
 			this.GitHubLabel.AutoSize = true;
-			this.GitHubLabel.Location = new System.Drawing.Point(12, 116);
+			this.GitHubLabel.Location = new System.Drawing.Point(12, 97);
 			this.GitHubLabel.Name = "GitHubLabel";
-			this.GitHubLabel.Size = new System.Drawing.Size(59, 20);
-			this.GitHubLabel.TabIndex = 12;
+			this.GitHubLabel.Size = new System.Drawing.Size(48, 15);
+			this.GitHubLabel.TabIndex = 3;
 			this.GitHubLabel.Text = "GitHub:";
+			// 
+			// GitHubLinkLabel
+			// 
+			this.GitHubLinkLabel.AutoSize = true;
+			this.GitHubLinkLabel.Location = new System.Drawing.Point(66, 97);
+			this.GitHubLinkLabel.Name = "GitHubLinkLabel";
+			this.GitHubLinkLabel.Size = new System.Drawing.Size(142, 15);
+			this.GitHubLinkLabel.TabIndex = 4;
+			this.GitHubLinkLabel.TabStop = true;
+			this.GitHubLinkLabel.Text = "Ershovoy/NoteTakingApp";
+			this.GitHubLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.GitHubLinkLabel_LinkClicked);
+			// 
+			// CopyrightLabel
+			// 
+			this.CopyrightLabel.AutoSize = true;
+			this.CopyrightLabel.Location = new System.Drawing.Point(261, 177);
+			this.CopyrightLabel.Name = "CopyrightLabel";
+			this.CopyrightLabel.Size = new System.Drawing.Size(31, 15);
+			this.CopyrightLabel.TabIndex = 5;
+			this.CopyrightLabel.Text = "2022";
 			// 
 			// AboutForm
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(302, 193);
-			this.Controls.Add(this.GitHubLabel);
-			this.Controls.Add(this.GitHubLinkLabel);
+			this.ClientSize = new System.Drawing.Size(304, 201);
 			this.Controls.Add(this.CopyrightLabel);
+			this.Controls.Add(this.GitHubLinkLabel);
+			this.Controls.Add(this.GitHubLabel);
 			this.Controls.Add(this.AppAuthorLabel);
 			this.Controls.Add(this.AppVersionLabel);
 			this.Controls.Add(this.AppTitleLabel);
@@ -124,8 +123,8 @@
 		private Label AppTitleLabel;
 		private Label AppVersionLabel;
 		private Label AppAuthorLabel;
-		private Label CopyrightLabel;
-		private LinkLabel GitHubLinkLabel;
 		private Label GitHubLabel;
+		private LinkLabel GitHubLinkLabel;
+		private Label CopyrightLabel;
 	}
 }

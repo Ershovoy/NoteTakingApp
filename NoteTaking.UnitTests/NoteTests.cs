@@ -39,7 +39,7 @@ public class NoteTests
 	{
 		// Arrange
 		var note = new Note();
-		var expected = NoteCategoryType.Default;
+		var expected = NoteCategory.Undefined;
 
 		// Act
 		var actual = note.Category;
@@ -84,10 +84,10 @@ public class NoteTests
 	{
 		// Arrange
 		var note = new Note();
-		var expected = NoteCategoryType.Document;
+		var expected = NoteCategory.Document;
 
 		// Act
-		note.Category = NoteCategoryType.Document;
+		note.Category = NoteCategory.Document;
 		var actual = note.Category;
 
 		// Assert
@@ -98,10 +98,10 @@ public class NoteTests
 	public void NoteConstructor_CorrectValue()
 	{
 		// Arrange
-		var note = new Note("Note title", "Note text", NoteCategoryType.Health);
+		var note = new Note("Note title", "Note text", NoteCategory.Health);
 		var expectedTitle = "Note title";
 		var expectedText = "Note text";
-		var expectedCategory = NoteCategoryType.Health;
+		var expectedCategory = NoteCategory.Health;
 
 		// Act
 		var actualTitle = note.Title;
@@ -119,11 +119,11 @@ public class NoteTests
 	{
 		// Arrange
 		var note = new Note();
-		var expected = note.ModifiedTime;
+		var expected = note.ModificationTime;
 
 		// Act
 		note.Title = "New note title...";
-		var actual = note.ModifiedTime;
+		var actual = note.ModificationTime;
 
 		// Assert
 		Assert.That(expected, Is.LessThan(actual));
@@ -134,11 +134,11 @@ public class NoteTests
 	{
 		// Arrange
 		var note = new Note();
-		var expected = note.ModifiedTime;
+		var expected = note.ModificationTime;
 
 		// Act
 		note.Text = "New note text...";
-		var actual = note.ModifiedTime;
+		var actual = note.ModificationTime;
 
 		// Assert
 		Assert.That(expected, Is.LessThan(actual));
@@ -149,11 +149,11 @@ public class NoteTests
 	{
 		// Arrange
 		var note = new Note();
-		var expected = note.ModifiedTime;
+		var expected = note.ModificationTime;
 
 		// Act
-		note.Category = NoteCategoryType.Document;
-		var actual = note.ModifiedTime;
+		note.Category = NoteCategory.Document;
+		var actual = note.ModificationTime;
 
 		// Assert
 		Assert.That(expected, Is.LessThan(actual));

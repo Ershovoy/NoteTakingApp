@@ -2,8 +2,6 @@
 
 namespace NoteTaking;
 
-// TODO: + сохранение и загрузка блокнота - отдельная самостоятельная задача, которая тянет за собой стороннюю библиотеку. Вынести в отдельный класс NotebookSerializer
-// TODO: + класс NotebookSerializer должен определять дефолтный путь для сохранения файлов, но при этом его можно поменять через открытое свойство. Передавать путь в методы каждый раз не надо
 /// <summary>
 /// Класс для сериализации класса Notebook.
 /// </summary>
@@ -34,7 +32,12 @@ public static class NotebookSerializer
 	/// <param name="notebook">Блокнот для сохранения.</param>
 	public static void Save(Notebook notebook)
 	{
-		File.WriteAllText(_path, JsonConvert.SerializeObject(notebook, Formatting.Indented));
+		// TODO: + лучше в одной строке вызывать сериализацию, а во второй запись в файл - 
+		// строки короче, читаемее и проще в отладке (брейкпоинты можно поставить на каждую отдельную строчку)
+
+		// TODO: + даже внутри класса не надо обращаться к полям напрямую - лучше через свойства. Класс тоже должен работать с полями через валидацию
+		string serializedNotebook = JsonConvert.SerializeObject(notebook, Formatting.Indented);
+		File.WriteAllText(Path, serializedNotebook);
 	}
 
 	/// <summary>
@@ -43,11 +46,20 @@ public static class NotebookSerializer
 	/// <returns>Загруженный блокнот.</returns>
 	public static Notebook Load()
 	{
-		Notebook? notebook = JsonConvert.DeserializeObject<Notebook>(File.ReadAllText(_path));
-		if(notebook == null)
+		// TODO: + а если исключения? А если файл не существует? Сделать обработку исключений, которая будет возвращать пустой блокнот
+		if (!File.Exists(Path))
+		{
+			throw new FileNotFoundException($"Failed to load notebook from {Path}, " +
+				$"file with notebook data didn't exist.");
+		}
+
+		string fileText = File.ReadAllText(Path);
+		Notebook? notebook = JsonConvert.DeserializeObject<Notebook>(fileText);
+		if (notebook == null)
 		{
 			return new Notebook();
 		}
+
 		return notebook;
 	}
 }

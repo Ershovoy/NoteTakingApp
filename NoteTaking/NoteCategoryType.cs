@@ -3,9 +3,11 @@
 /// <summary>
 /// Перечисление категории заметкок.
 /// </summary>
-public enum NoteCategoryType
+// TODO: + слово Type в названии лишнее, убрать. Категория и так как правило означает ограниченный набор значений
+public enum NoteCategory
 {
-	Default,
+    // TODO: + убрать вариант Default. Варианта All тоже быть не должно в перечислении
+    Undefined,
 	Work,
 	Home,
 	Health,

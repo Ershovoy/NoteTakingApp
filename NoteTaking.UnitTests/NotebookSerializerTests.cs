@@ -13,8 +13,8 @@ public class NotebookSerializerTests
 		var expected = new Notebook();
 
 		// Act
-		expected.AddNote(new Note("First note", "", NoteCategoryType.Default));
-		expected.AddNote(new Note("Second note", "WASD", NoteCategoryType.Home));
+		expected.AddNote(new Note("First note", "", NoteCategory.Undefined));
+		expected.AddNote(new Note("Second note", "WASD", NoteCategory.Home));
 		// TODO: + абсолютные пути в программировании - это абсолютное зло! А если у разработчика нет раздела D? А если такого раздела не будет на билд-сервере (скорее всего)? Тесты упадут, хотя в самой тестируемой логике нет ошибок. Переделать на относительные пути
 		// TODO: + в случае тестов надо создавать подпапку Test в папке bin, откуда и запускаются юнит-тесты, и сохранять все файлы там. Еще можно разделить папки Input и Output, если надо
 		NotebookSerializer.Path = @"..\..\Tests\NotebookData.txt";

@@ -7,9 +7,6 @@ namespace NoteTaking;
 /// </summary>
 public class Note
 {
-	// TODO: + порядом членов класса: константы, static и readonly поля, обычные поля, свойства, конструкторы, открытые методы, закрытые методы, обработчики. Переделать порядок членов класса во всём решении 
-	// TODO: + xml-комментарии не используются сами по себе, только перед методом, классом, полем
-	// TODO: + static readonly - это const
 	/// <summary>
 	/// Стандартный заголовок заметки.
 	/// </summary>
@@ -23,8 +20,15 @@ public class Note
 	/// <summary>
 	/// Стандартная категория заметки.
 	/// </summary>
-	private const NoteCategoryType _defaultNoteCategory = NoteCategoryType.Default;
+	private const NoteCategory _defaultNoteCategory = NoteCategory.Undefined;
 
+	/// <summary>
+	/// Максимальная длина заголовка заметки.
+	/// </summary>
+	private const int _maxTitleLength = 40;
+
+	// TODO: ? зачем делать все поля как JsonProperty, но при этом игнорировать все свойства?
+	// Куча лишних атрибутов, можно реализовать без них. Например, сделав закрытый конструктор для сериализации
 	/// <summary>
 	/// Заголовок заметки.
 	/// </summary>
@@ -42,21 +46,21 @@ public class Note
 	/// Категория заметки.
 	/// </summary>
 	[JsonProperty]
-	private NoteCategoryType _category;
+	private NoteCategory _category;
 
 	/// <summary>
 	/// Время создания заметки.
 	/// </summary>
 	[JsonProperty]
-	private DateTime _creatingTime = DateTime.Now;
+	private DateTime _creationTime = DateTime.Now;
 
 	/// <summary>
 	/// Время последнего изменения заметки.
 	/// </summary>
 	[JsonProperty]
-	private DateTime _modifiedTime = DateTime.Now;
+	private DateTime _modificationTime = DateTime.Now;
 
-	// TODO: + неправильное использование комментария
+	// TODO: + класс должен сам валидировать поле на длину. Где проверка?
 	/// <summary>
 	/// Заголовок заметки.
 	/// </summary>
@@ -66,8 +70,13 @@ public class Note
 		get { return _title; }
 		set
 		{
+			if (value.Length > _maxTitleLength)
+			{
+				throw new ArgumentException($"The note title must be less than {_maxTitleLength} characters.");
+			}
+
 			_title = value;
-			_modifiedTime = DateTime.Now;
+			_modificationTime = DateTime.Now;
 		}
 	}
 
@@ -81,7 +90,7 @@ public class Note
 		set
 		{
 			_text = value;
-			_modifiedTime = DateTime.Now;
+			_modificationTime = DateTime.Now;
 		}
 	}
 
@@ -89,42 +98,45 @@ public class Note
 	/// Категория заметки.
 	/// </summary>
 	[JsonIgnore]
-	public NoteCategoryType Category
+	public NoteCategory Category
 	{
 		get { return _category; }
 		set
 		{
 			_category = value;
-			_modifiedTime = DateTime.Now;
+			_modificationTime = DateTime.Now;
 		}
 	}
 
+	// TODO: + в интерфейсе свойство называется Created. Где правда? Исправить, сделать единообразно везде
 	/// <summary>
 	/// Время создания заметки.
 	/// </summary>
 	[JsonIgnore]
-	public DateTime CreatingTime
+	public DateTime CreationTime
 	{
-		get { return _creatingTime; }
+		get { return _creationTime; }
 	}
 
 	/// <summary>
 	/// Время последного изменения заметки.
 	/// </summary>
 	[JsonIgnore]
-	public DateTime ModifiedTime
+	public DateTime ModificationTime
 	{
-		get { return _modifiedTime; }
+		get { return _modificationTime; }
 	}
 
-	// TODO: + три конструктора можно было бы реализовать одним методом с параметрами по умолчанию или явным наследованием от конструктора
 	/// <summary>
 	/// Создание заметки по заданному заголовку, содержимому и её категории.
 	/// </summary>
 	/// <param name="title">Заголовок заметки.</param>
 	/// <param name="text">Содержимое заметки.</param>
 	/// <param name="noteCategory">Категория заметки.</param>
-	public Note(string title = _defaultNoteTitle, string text = _defaultNoteText, NoteCategoryType noteCategory = _defaultNoteCategory)
+	// TODO: + не должно быть строк длиннее 100 символов, исправить
+	public Note(string title = _defaultNoteTitle,
+		string text = _defaultNoteText,
+		NoteCategory noteCategory = _defaultNoteCategory)
 	{
 		Title = title;
 		Text = text;
