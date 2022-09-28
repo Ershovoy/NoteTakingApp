@@ -61,13 +61,37 @@ public class NotebookTests
 	{
 		// Arrange
 		var notebook = new Notebook();
+		notebook.AddNote(new Note("Second note", "WASD", NoteCategory.Home));
 
 		// Act
-		notebook.AddNote(new Note("Second note", "WASD", NoteCategory.Home));
 		notebook.RemoveNote(0);
 
 		// Assert
 		Assert.Throws<ArgumentOutOfRangeException>(() => { notebook[0].Title = "New title"; });
+	}
+
+	[Test(Description = "Removing note from notebook test by specifying certain note")]
+	public void RemoveNoteTest2()
+	{
+		// Arrange
+		var actual = new Notebook();
+		actual.AddNote(new Note("First note", "", NoteCategory.Undefined));
+		actual.AddNote(new Note("Second note", "", NoteCategory.Undefined));
+		actual.AddNote(new Note("The Bible",
+			"In the beginning God created the heavens and the earth.",
+			NoteCategory.Document));
+
+		var expected = new Notebook();
+		expected.Notes = actual.Notes;
+
+		actual.AddNote(new Note("Demonic note", "^&*#!)@^$&^_@#)_+!", NoteCategory.Other));
+		Note noteToDelete = actual[0];
+
+		// Act
+		actual.RemoveNote(noteToDelete);
+
+		// Assert
+		Assert.That(expected, Is.EqualTo(actual));
 	}
 
 	[Test(Description = "Notebook get note property test")]

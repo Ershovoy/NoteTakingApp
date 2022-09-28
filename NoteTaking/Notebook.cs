@@ -1,11 +1,11 @@
-namespace NoteTaking;
+﻿namespace NoteTaking;
 
 /// <summary>
 /// Блокнот
 /// </summary>
 public class Notebook
 {
-    // TODO: по заданию, программа должна еще сохранять и последнюю выбранную заметку, а при запуске открывать её снова.
+	// TODO: по заданию, программа должна еще сохранять и последнюю выбранную заметку, а при запуске открывать её снова.
 
 	// TODO: + опять лишние атрибуты у полей и свойств
 	/// <summary>
@@ -80,11 +80,26 @@ public class Notebook
 	}
 
 	/// <summary>
+	/// Удалить существующую заметку по ей соответственной.
+	/// </summary>
+	/// <param name="note">Соответствующая заметка для удаления.</param>
+	public void RemoveNote(Note NoteToDelete)
+	{
+		for(int i = 0; i < NotesCount; i++)
+		{
+			if (this[i] == NoteToDelete)
+			{
+				RemoveNote(i);
+			}
+		}
+	}
+
+	/// <summary>
 	/// Сортировка заметок по времени их последнего изменения.
 	/// </summary>
 	public void SortNotesByModification()
 	{
-        _notes.Sort((t1, t2) => DateTime.Compare(t2.ModificationTime, t1.ModificationTime));
+		_notes.Sort((t1, t2) => DateTime.Compare(t2.ModificationTime, t1.ModificationTime));
 	}
 
 	/// <summary>
@@ -98,9 +113,9 @@ public class Notebook
 			return this;
 		}
 
-        // TODO: блокнот создает экземпляры других блокнотов? Неправильно.
+		// TODO: блокнот создает экземпляры других блокнотов? Неправильно.
 		// Возвращаться должен обычный список заметок, но не блокнот.
-        Notebook result = new();
+		Notebook result = new();
 		foreach (Note note in _notes)
 		{
 			if (note.Category == noteCategory)
@@ -128,7 +143,7 @@ public class Notebook
 		{
 			return false;
 		}
-		for (int i = 0; i < NotesCount; ++i)
+		for (int i = 0; i < NotesCount; i++)
 		{
 			if (!this[i].Equals(other[i]))
 			{
