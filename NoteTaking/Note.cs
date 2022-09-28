@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace NoteTaking;
 
@@ -152,6 +152,29 @@ public class Note
 	}
 
 	/// <summary>
+	/// Заметки равны, тогда когда каждое их поля равны между собой.
+	/// </summary>
+	/// <param name="obj">Объект класса Note.</param>
+	/// <returns>True если заметки равны, иначе false.</returns>
+	public override bool Equals(object? obj)
+	{
+		var other = obj as Note;
+		if (other == null)
+		{
+			return false;
+		}
+		if(Title == other.Title &&
+			Text == other.Text &&
+			Category == other.Category &&
+			CreationTime == other.CreationTime &&
+			ModificationTime == other.ModificationTime)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	/// <summary>
 	/// Закрытый конструктор вызываемый во время сериализации.
 	/// </summary>
 	/// <param name="title">Заголовок заметки.</param>
@@ -162,7 +185,6 @@ public class Note
 	[JsonConstructor]
 	private Note(string title, string text, NoteCategory category,
 		DateTime creationTime, DateTime modificationTime)
-		: this(title, text, category)
 	{
 		Title = title;
 		Text = text;

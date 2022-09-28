@@ -7,10 +7,10 @@ public class Notebook
 {
     // TODO: по заданию, программа должна еще сохранять и последнюю выбранную заметку, а при запуске открывать её снова.
 
-    // TODO: + опять лишние атрибуты у полей и свойств
-    /// <summary>
-    /// Массив всех заметок блокнота.
-    /// </summary>
+	// TODO: + опять лишние атрибуты у полей и свойств
+	/// <summary>
+	/// Массив всех заметок блокнота.
+	/// </summary>
 	private List<Note> _notes;
 
 	/// <summary>
@@ -37,14 +37,14 @@ public class Notebook
 	/// <returns>Заметка по заданному индексу.</returns>
 	public Note this[int index]
 	{
-		get 
+		get
 		{
 			// TODO: зачем здесь вызывается сортировка?
 			SortNotesByModification();
 			return _notes[index];
 		}
-		set 
-		{ 
+		set
+		{
 			_notes[index] = value;
 			SortNotesByModification();
 		}
@@ -109,5 +109,32 @@ public class Notebook
 			}
 		}
 		return result;
+	}
+
+	/// <summary>
+	/// Два блокнота равны, тогда когда каждая заметка одного блокнота,
+	/// равна соответствующей заметки другого блокнота.
+	/// </summary>
+	/// <param name="obj">Объект класса Notebook.</param>
+	/// <returns>True если блокноты равны, иначе false.</returns>
+	public override bool Equals(object? obj)
+	{
+		var other = obj as Notebook;
+		if (other == null)
+		{
+			return false;
+		}
+		if (NotesCount != other.NotesCount)
+		{
+			return false;
+		}
+		for (int i = 0; i < NotesCount; ++i)
+		{
+			if (!this[i].Equals(other[i]))
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 }
