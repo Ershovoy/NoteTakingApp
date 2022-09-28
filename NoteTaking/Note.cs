@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 
 namespace NoteTaking;
 
@@ -32,45 +32,39 @@ public class Note
 	/// <summary>
 	/// Заголовок заметки.
 	/// </summary>
-	[JsonProperty]
 	private string _title;
 
 	/// <summary>
 	/// Основной текст заметки.
 	/// </summary>
-	[JsonProperty]
 	private string _text;
 
 	// TODO: + неправильное использование комментария
 	/// <summary>
 	/// Категория заметки.
 	/// </summary>
-	[JsonProperty]
 	private NoteCategory _category;
 
 	/// <summary>
 	/// Время создания заметки.
 	/// </summary>
-	[JsonProperty]
 	private DateTime _creationTime = DateTime.Now;
 
 	/// <summary>
 	/// Время последнего изменения заметки.
 	/// </summary>
-	[JsonProperty]
 	private DateTime _modificationTime = DateTime.Now;
 
 	// TODO: + класс должен сам валидировать поле на длину. Где проверка?
 	/// <summary>
 	/// Заголовок заметки.
 	/// </summary>
-	[JsonIgnore]
 	public string Title
 	{
 		get { return _title; }
 		set
 		{
-			if (value.Length > _maxTitleLength)
+			if (value != null && value.Length > _maxTitleLength)
 			{
 				throw new ArgumentException($"The note title must be less than {_maxTitleLength} characters.");
 			}
@@ -83,7 +77,6 @@ public class Note
 	/// <summary>
 	/// Содержимое заметки.
 	/// </summary>
-	[JsonIgnore]
 	public string Text
 	{
 		get { return _text; }
@@ -97,7 +90,6 @@ public class Note
 	/// <summary>
 	/// Категория заметки.
 	/// </summary>
-	[JsonIgnore]
 	public NoteCategory Category
 	{
 		get { return _category; }
@@ -112,19 +104,35 @@ public class Note
 	/// <summary>
 	/// Время создания заметки.
 	/// </summary>
-	[JsonIgnore]
 	public DateTime CreationTime
 	{
 		get { return _creationTime; }
+		private set 
+		{
+			if(CreationTime > ModificationTime)
+			{
+				throw new ArgumentException("Creation time must happen before modification time.");
+			}
+
+			_creationTime = value;
+		}
 	}
 
 	/// <summary>
 	/// Время последного изменения заметки.
 	/// </summary>
-	[JsonIgnore]
 	public DateTime ModificationTime
 	{
 		get { return _modificationTime; }
+		private set
+		{
+			if (ModificationTime < CreationTime)
+			{
+				throw new ArgumentException("Modification time must happen before creation time.");
+			}
+
+			_modificationTime = value;
+		}
 	}
 
 	/// <summary>
@@ -141,5 +149,25 @@ public class Note
 		Title = title;
 		Text = text;
 		Category = noteCategory;
+	}
+
+	/// <summary>
+	/// Закрытый конструктор вызываемый во время сериализации.
+	/// </summary>
+	/// <param name="title">Заголовок заметки.</param>
+	/// <param name="text">Содержимое заметки.</param>
+	/// <param name="category">Категория заметки.</param>
+	/// <param name="creationTime">Время создания заметки.</param>
+	/// <param name="modificationTime">Время последнего изменения заметки.</param>
+	[JsonConstructor]
+	private Note(string title, string text, NoteCategory category,
+		DateTime creationTime, DateTime modificationTime)
+		: this(title, text, category)
+	{
+		Title = title;
+		Text = text;
+		Category = category;
+		CreationTime = creationTime;
+		ModificationTime = modificationTime;
 	}
 }

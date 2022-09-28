@@ -49,8 +49,8 @@ public static class NotebookSerializer
 		// TODO: + а если исключения? А если файл не существует? Сделать обработку исключений, которая будет возвращать пустой блокнот
 		if (!File.Exists(Path))
 		{
-			throw new FileNotFoundException($"Failed to load notebook from {Path}, " +
-				$"file with notebook data didn't exist.");
+			throw new FileNotFoundException($"Failed to load notebook from {Path}.\n" +
+				$"File with notebook data didn't exist. So created one.");
 		}
 
 		string fileText = File.ReadAllText(Path);

@@ -1,5 +1,3 @@
-﻿using Newtonsoft.Json;
-
 namespace NoteTaking;
 
 /// <summary>
@@ -9,17 +7,24 @@ public class Notebook
 {
     // TODO: по заданию, программа должна еще сохранять и последнюю выбранную заметку, а при запуске открывать её снова.
 
-    // TODO: ? опять лишние атрибуты у полей и свойств
+    // TODO: + опять лишние атрибуты у полей и свойств
     /// <summary>
     /// Массив всех заметок блокнота.
     /// </summary>
-    [JsonProperty]
 	private List<Note> _notes;
+
+	/// <summary>
+	/// Список всех заметок блокнота.
+	/// </summary>
+	public List<Note> Notes
+	{
+		get { return _notes; }
+		set { _notes = value; }
+	}
 
 	/// <summary>
 	/// Текущее количество заметок.
 	/// </summary>
-	[JsonIgnore]
 	public int NotesCount
 	{
 		get { return _notes.Count; }
@@ -93,7 +98,7 @@ public class Notebook
 			return this;
 		}
 
-        // TODO: => блокнот создает экземпляры других блокнотов? Неправильно.
+        // TODO: блокнот создает экземпляры других блокнотов? Неправильно.
 		// Возвращаться должен обычный список заметок, но не блокнот.
         Notebook result = new();
 		foreach (Note note in _notes)
