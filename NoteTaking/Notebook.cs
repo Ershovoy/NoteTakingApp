@@ -5,13 +5,26 @@
 /// </summary>
 public class Notebook
 {
-	// TODO: по заданию, программа должна еще сохранять и последнюю выбранную заметку, а при запуске открывать её снова.
+	// TODO: + по заданию, программа должна еще сохранять и последнюю выбранную заметку, а при запуске открывать её снова.
 
 	// TODO: + опять лишние атрибуты у полей и свойств
+	// TODO: + длинная строка
+	/// <summary>
+	/// Справочная заметка.
+	/// </summary>
+	private static readonly Note _helpNote = new Note("It's the title of this help note.",
+		"Create your note by clicking on the add button in the lower left corner " +
+		"or select existed one on the left box.");
+
 	/// <summary>
 	/// Массив всех заметок блокнота.
 	/// </summary>
 	private List<Note> _notes;
+
+	/// <summary>
+	/// Последняя открытая заметка.
+	/// </summary>
+	private Note _lastOpenNote;
 
 	/// <summary>
 	/// Список всех заметок блокнота.
@@ -20,6 +33,23 @@ public class Notebook
 	{
 		get { return _notes; }
 		set { _notes = value; }
+	}
+
+	/// <summary>
+	/// Последняя открытая заметка.
+	/// </summary>
+	public Note LastOpenNote
+	{
+		set { _lastOpenNote = value; }
+		get { return _lastOpenNote; }
+	}
+
+	/// <summary>
+	/// Получить справочную заметку.
+	/// </summary>
+	public Note HelpNote
+	{
+		get { return _helpNote; }
 	}
 
 	/// <summary>
@@ -39,8 +69,7 @@ public class Notebook
 	{
 		get
 		{
-			// TODO: зачем здесь вызывается сортировка?
-			SortNotesByModification();
+			// TODO: + зачем здесь вызывается сортировка?
 			return _notes[index];
 		}
 		set
@@ -66,6 +95,7 @@ public class Notebook
 	public void AddNote(Note note)
 	{
 		_notes.Add(note);
+		LastOpenNote = note;
 		SortNotesByModification();
 	}
 
@@ -81,6 +111,10 @@ public class Notebook
 			_notes.Insert(indexPlace, notes[i]);
 			indexPlace += 1;
 		}
+		if (notes.Count != 0)
+		{
+			LastOpenNote = notes[notes.Count - 1];
+		}
 		SortNotesByModification();
 	}
 
@@ -90,6 +124,10 @@ public class Notebook
 	/// <param name="index">Индекс удаляемой заметки.</param>
 	public void RemoveNote(int index)
 	{
+		if (_notes[index].Equals(LastOpenNote))
+		{
+			LastOpenNote = HelpNote;
+		}
 		_notes.RemoveAt(index);
 		SortNotesByModification();
 	}
@@ -105,6 +143,10 @@ public class Notebook
 			if (this[i] == NoteToDelete)
 			{
 				RemoveNote(i);
+				if (NoteToDelete == LastOpenNote)
+				{
+					LastOpenNote = HelpNote;
+				}
 			}
 		}
 	}
@@ -115,6 +157,18 @@ public class Notebook
 	public void Clear()
 	{
 		_notes.Clear();
+		LastOpenNote = HelpNote;
+	}
+
+	/// <summary>
+	/// Просмотреть заметку по индексу.
+	/// </summary>
+	/// <param name="index">Индекс заметки.</param>
+	/// <returns>Заметка для просмотра.</returns>
+	public Note ViewNote(int index)
+	{
+		LastOpenNote = _notes[index];
+		return _notes[index];
 	}
 
 	/// <summary>

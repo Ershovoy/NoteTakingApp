@@ -17,14 +17,6 @@ public partial class MainForm : Form
 	/// </summary>
 	private Notebook _displayedNotebook;
 
-	// TODO: + длинная строка
-	/// <summary>
-	/// Справочная заметка.
-	/// </summary>
-	private Note _helpNote = new Note($"It's the title of this help note.",
-		"Create your first note by clicking on the button in the lower left corner " +
-		"or select existed one on the left box.");
-
 	/// <summary>
 	/// Конструктор формы по умолчанию.
 	/// </summary>
@@ -53,14 +45,13 @@ public partial class MainForm : Form
 				$"file with notebook data corrupted.", "Error occured.");
 		}
 
-
 		foreach (NoteCategory noteCategoryType in Enum.GetValues(typeof(NoteCategory)))
 		{
 			CategoryComboBox.Items.Add(noteCategoryType);
 		}
 		CategoryComboBox.SelectedIndex = 0;
 
-		DisplayNoteContent(_helpNote);
+		DisplayNoteContent(_notebookData.LastOpenNote);
 		UpdateNoteListBox();
 	}
 
@@ -183,15 +174,18 @@ public partial class MainForm : Form
 	{
 		if (NotesListBox.SelectedIndex != -1)
 		{
-			Note selectedNote = _displayedNotebook[NotesListBox.SelectedIndex];
+			Note selectedNote = _displayedNotebook.ViewNote(NotesListBox.SelectedIndex);
+			_notebookData.LastOpenNote = selectedNote;
 			DisplayNoteContent(selectedNote);
+			NotebookSerializer.Save(_notebookData);
 			return;
 		}
 
 		// TODO: + чтобы не делать допвложенность, можно удалить else, а в ветке под условием if добавить оператор return
-		NoteTitleLabel.Text = "";
-		NoteCategoryLabel.Text = "Category:";
-		NoteTextRichTextBox.Text = "";
+		Note lastOpenNote = _notebookData.LastOpenNote;
+		NoteTitleLabel.Text = lastOpenNote.Title;
+		NoteCategoryLabel.Text = $"Category: {lastOpenNote.Category}";
+		NoteTextRichTextBox.Text = lastOpenNote.Text;
 		NoteCreationDateTime.Value = DateTime.Now;
 		NoteModificationDateTime.Value = DateTime.Now;
 	}
