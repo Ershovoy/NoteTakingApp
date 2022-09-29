@@ -56,18 +56,78 @@ public class NotebookTests
 		Assert.That(expected, Is.EqualTo(actual));
 	}
 
+	[Test(Description = "Notebook add range of notes test")]
+	public void AddRangeTest()
+	{
+		// Arrange
+		var expected = new Notebook();
+		expected.AddNote(new Note("Test note", "", NoteCategory.Document));
+		expected.AddNote(new Note("Second note", "", NoteCategory.Undefined));
+		
+		// Act
+		var actual = new Notebook();
+		List<Note> notes = expected.GetNotesWithCategory(NoteCategory.Undefined);
+		actual.AddRange(notes, 0);
+
+		// Assert
+		Assert.That(expected, Is.EqualTo(actual));
+	}
+
 	[Test(Description = "Removing note from notebook test")]
 	public void RemoveNoteTest()
 	{
 		// Arrange
 		var notebook = new Notebook();
+		notebook.AddNote(new Note("Second note", "WASD", NoteCategory.Home));
 
 		// Act
-		notebook.AddNote(new Note("Second note", "WASD", NoteCategory.Home));
 		notebook.RemoveNote(0);
 
 		// Assert
 		Assert.Throws<ArgumentOutOfRangeException>(() => { notebook[0].Title = "New title"; });
+	}
+
+	[Test(Description = "Removing note from notebook test by specifying certain note")]
+	public void RemoveNoteTest2()
+	{
+		// Arrange
+		var actual = new Notebook();
+		actual.AddNote(new Note("First note", "", NoteCategory.Undefined));
+		actual.AddNote(new Note("Second note", "", NoteCategory.Undefined));
+		actual.AddNote(new Note("The Bible",
+			"In the beginning God created the heavens and the earth.",
+			NoteCategory.Document));
+
+		var expected = new Notebook();
+		List<Note> notes = actual.GetNotesWithCategory(NoteCategory.Undefined);
+		expected.AddRange(notes, 0);
+
+		actual.AddNote(new Note("Demonic note", "^&*#!)@^$&^_@#)_+!", NoteCategory.Other));
+		Note noteToDelete = actual[0];
+
+		// Act
+		actual.RemoveNote(noteToDelete);
+
+		// Assert
+		Assert.That(expected, Is.EqualTo(actual));
+	}
+
+	[Test(Description = "Notebook clear notes test")]
+	public void ClearTest()
+	{
+		// Arrange
+		var notebook = new Notebook();
+		notebook.AddNote(new Note("First note", "", NoteCategory.Undefined));
+		notebook.AddNote(new Note("Second note", "", NoteCategory.Home));
+		notebook.AddNote(new Note("Third note", "", NoteCategory.Undefined));
+		int expectedNoteCount = 0;
+
+		// Act
+		notebook.Clear();
+		int actualNoteCount = notebook.NotesCount;
+
+		// Assert
+		Assert.That(expectedNoteCount, Is.EqualTo(actualNoteCount));
 	}
 
 	[Test(Description = "Notebook get note property test")]

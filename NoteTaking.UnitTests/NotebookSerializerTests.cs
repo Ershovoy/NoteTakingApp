@@ -22,7 +22,8 @@ public class NotebookSerializerTests
 		var actual = NotebookSerializer.Load();
 
 		// Assert
-		// TODO: ? где проверка того, что загрузилось? А если метод вернул null или пустой блокнот?
+		// TODO: + где проверка того, что загрузилось? А если метод вернул null или пустой блокнот?
+		Assert.That(actual, Is.Not.Null);
 		Assert.That(expected, Is.EqualTo(actual));
 	}
 }

@@ -1,4 +1,4 @@
-﻿using NoteTaking;
+using NoteTaking;
 
 namespace NoteTakingUI;
 
@@ -16,14 +16,6 @@ public partial class MainForm : Form
 	/// Список заметок для отображения на экране.
 	/// </summary>
 	private Notebook _displayedNotebook;
-
-	// TODO: + длинная строка
-	/// <summary>
-	/// Справочная заметка.
-	/// </summary>
-	private Note _helpNote = new Note($"It's the title of this help note.",
-		"Create your first note by clicking on the button in the lower left corner " +
-		"or select existed one on the left box.");
 
 	/// <summary>
 	/// Конструктор формы по умолчанию.
@@ -53,14 +45,13 @@ public partial class MainForm : Form
 				$"file with notebook data corrupted.", "Error occured.");
 		}
 
-
 		foreach (NoteCategory noteCategoryType in Enum.GetValues(typeof(NoteCategory)))
 		{
 			CategoryComboBox.Items.Add(noteCategoryType);
 		}
 		CategoryComboBox.SelectedIndex = 0;
 
-		DisplayNoteContent(_helpNote);
+		DisplayNoteContent(_notebookData.LastOpenNote);
 		UpdateNoteListBox();
 	}
 
@@ -72,9 +63,12 @@ public partial class MainForm : Form
 		// TODO: + не надо нагромождать всё в одну строку. Бей на строки, создавай локальные переменные.
 		// Лучше всего читается код, когда в одной строке одно действие
 		NoteCategory selectedNoteCategory = (NoteCategory)CategoryComboBox.SelectedItem;
-		_displayedNotebook = _notebookData.GetNotesWithCategory(selectedNoteCategory);
+		List<Note> notes = _notebookData.GetNotesWithCategory(selectedNoteCategory);
+		// TODO: + заменить на AddRange, когда будет изменен возвращаемый тип данных метода GetNotesWithCategory()
+		_displayedNotebook.Clear();
+		_displayedNotebook.AddRange(notes, 0);
+
 		NotesListBox.Items.Clear();
-		// TODO: заменить на AddRange, когда будет изменен возвращаемый тип данных метода GetNotesWithCategory()
 		for (int i = 0; i < _displayedNotebook.NotesCount; ++i)
 		{
 			NotesListBox.Items.Add(_displayedNotebook[i].Title);
@@ -163,10 +157,10 @@ public partial class MainForm : Form
 			return;
 		}
 
-		// TODO: зачем замена заголовка?
-		_displayedNotebook[selectedNoteIndex].Title = "Note to delete";
+		// TODO: + зачем замена заголовка?
+		Note noteToDelete = _displayedNotebook[selectedNoteIndex];
+		_notebookData.RemoveNote(noteToDelete);
 		_notebookData.SortNotesByModification();
-		_notebookData.RemoveNote(0);
 		NotesListBox.SelectedIndex = -1;
 		UpdateNoteListBox();
 		// TODO: + Нет пересохранения после удаления заметки - данные ведь изменились
@@ -180,15 +174,18 @@ public partial class MainForm : Form
 	{
 		if (NotesListBox.SelectedIndex != -1)
 		{
-			Note selectedNote = _displayedNotebook[NotesListBox.SelectedIndex];
+			Note selectedNote = _displayedNotebook.ViewNote(NotesListBox.SelectedIndex);
+			_notebookData.LastOpenNote = selectedNote;
 			DisplayNoteContent(selectedNote);
+			NotebookSerializer.Save(_notebookData);
 			return;
 		}
 
 		// TODO: + чтобы не делать допвложенность, можно удалить else, а в ветке под условием if добавить оператор return
-		NoteTitleLabel.Text = "";
-		NoteCategoryLabel.Text = "Category:";
-		NoteTextRichTextBox.Text = "";
+		Note lastOpenNote = _notebookData.LastOpenNote;
+		NoteTitleLabel.Text = lastOpenNote.Title;
+		NoteCategoryLabel.Text = $"Category: {lastOpenNote.Category}";
+		NoteTextRichTextBox.Text = lastOpenNote.Text;
 		NoteCreationDateTime.Value = DateTime.Now;
 		NoteModificationDateTime.Value = DateTime.Now;
 	}
