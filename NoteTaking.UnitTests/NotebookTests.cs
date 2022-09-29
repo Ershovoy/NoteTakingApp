@@ -82,7 +82,8 @@ public class NotebookTests
 			NoteCategory.Document));
 
 		var expected = new Notebook();
-		expected.Notes = actual.Notes;
+		List<Note> notes = actual.GetNotesWithCategory(NoteCategory.Undefined);
+		expected.AddRange(notes);
 
 		actual.AddNote(new Note("Demonic note", "^&*#!)@^$&^_@#)_+!", NoteCategory.Other));
 		Note noteToDelete = actual[0];

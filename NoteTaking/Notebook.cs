@@ -1,4 +1,4 @@
-﻿namespace NoteTaking;
+namespace NoteTaking;
 
 /// <summary>
 /// Блокнот
@@ -85,7 +85,7 @@ public class Notebook
 	/// <param name="note">Соответствующая заметка для удаления.</param>
 	public void RemoveNote(Note NoteToDelete)
 	{
-		for(int i = 0; i < NotesCount; i++)
+		for (int i = 0; i < NotesCount; i++)
 		{
 			if (this[i] == NoteToDelete)
 			{
@@ -106,21 +106,21 @@ public class Notebook
 	/// Получить список заметок с заданной категорией.
 	/// </summary>
 	/// <param name="noteCategory">Категория заметки.</param>
-	public Notebook GetNotesWithCategory(NoteCategory noteCategory)
+	public List<Note> GetNotesWithCategory(NoteCategory noteCategory)
 	{
 		if (noteCategory == NoteCategory.Undefined)
 		{
-			return this;
+			return _notes;
 		}
 
-		// TODO: блокнот создает экземпляры других блокнотов? Неправильно.
+		// TODO: + блокнот создает экземпляры других блокнотов? Неправильно.
 		// Возвращаться должен обычный список заметок, но не блокнот.
-		Notebook result = new();
+		List<Note> result = new();
 		foreach (Note note in _notes)
 		{
 			if (note.Category == noteCategory)
 			{
-				result.AddNote(note);
+				result.Add(note);
 			}
 		}
 		return result;
