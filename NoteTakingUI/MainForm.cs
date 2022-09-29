@@ -166,10 +166,10 @@ public partial class MainForm : Form
 			return;
 		}
 
-		// TODO: зачем замена заголовка?
-		_displayedNotebook[selectedNoteIndex].Title = "Note to delete";
+		// TODO: + зачем замена заголовка?
+		Note noteToDelete = _displayedNotebook[selectedNoteIndex];
+		_notebookData.RemoveNote(noteToDelete);
 		_notebookData.SortNotesByModification();
-		_notebookData.RemoveNote(0);
 		NotesListBox.SelectedIndex = -1;
 		UpdateNoteListBox();
 		// TODO: + Нет пересохранения после удаления заметки - данные ведь изменились
