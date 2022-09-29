@@ -1,4 +1,4 @@
-﻿using NoteTaking;
+using NoteTaking;
 
 namespace NoteTakingUI;
 
@@ -72,9 +72,12 @@ public partial class MainForm : Form
 		// TODO: + не надо нагромождать всё в одну строку. Бей на строки, создавай локальные переменные.
 		// Лучше всего читается код, когда в одной строке одно действие
 		NoteCategory selectedNoteCategory = (NoteCategory)CategoryComboBox.SelectedItem;
-		_displayedNotebook = _notebookData.GetNotesWithCategory(selectedNoteCategory);
+		List<Note> notes = _notebookData.GetNotesWithCategory(selectedNoteCategory);
+		// TODO: + заменить на AddRange, когда будет изменен возвращаемый тип данных метода GetNotesWithCategory()
+		_displayedNotebook.Clear();
+		_displayedNotebook.AddRange(notes, 0);
+
 		NotesListBox.Items.Clear();
-		// TODO: заменить на AddRange, когда будет изменен возвращаемый тип данных метода GetNotesWithCategory()
 		for (int i = 0; i < _displayedNotebook.NotesCount; ++i)
 		{
 			NotesListBox.Items.Add(_displayedNotebook[i].Title);

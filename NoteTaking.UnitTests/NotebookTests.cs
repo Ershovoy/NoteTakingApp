@@ -1,4 +1,4 @@
-namespace NoteTaking.UnitTests;
+﻿namespace NoteTaking.UnitTests;
 
 using NUnit.Framework;
 
@@ -56,6 +56,23 @@ public class NotebookTests
 		Assert.That(expected, Is.EqualTo(actual));
 	}
 
+	[Test(Description = "Notebook add range of notes test")]
+	public void AddRangeTest()
+	{
+		// Arrange
+		var expected = new Notebook();
+		expected.AddNote(new Note("Test note", "", NoteCategory.Document));
+		expected.AddNote(new Note("Second note", "", NoteCategory.Undefined));
+		
+		// Act
+		var actual = new Notebook();
+		List<Note> notes = expected.GetNotesWithCategory(NoteCategory.Undefined);
+		actual.AddRange(notes, 0);
+
+		// Assert
+		Assert.That(expected, Is.EqualTo(actual));
+	}
+
 	[Test(Description = "Removing note from notebook test")]
 	public void RemoveNoteTest()
 	{
@@ -83,7 +100,7 @@ public class NotebookTests
 
 		var expected = new Notebook();
 		List<Note> notes = actual.GetNotesWithCategory(NoteCategory.Undefined);
-		expected.AddRange(notes);
+		expected.AddRange(notes, 0);
 
 		actual.AddNote(new Note("Demonic note", "^&*#!)@^$&^_@#)_+!", NoteCategory.Other));
 		Note noteToDelete = actual[0];
@@ -96,7 +113,7 @@ public class NotebookTests
 	}
 
 	[Test(Description = "Notebook clear notes test")]
-	public void ClearNotesTest()
+	public void ClearTest()
 	{
 		// Arrange
 		var notebook = new Notebook();

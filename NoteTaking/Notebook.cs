@@ -1,4 +1,4 @@
-namespace NoteTaking;
+﻿namespace NoteTaking;
 
 /// <summary>
 /// Блокнот
@@ -66,6 +66,21 @@ public class Notebook
 	public void AddNote(Note note)
 	{
 		_notes.Add(note);
+		SortNotesByModification();
+	}
+
+	/// <summary>
+	/// Вставить список заметок в блокнот.
+	/// </summary>
+	/// <param name="notes">Список заметок для добавления.</param>
+	/// <param name="indexPlace">Место для вставки.</param>
+	public void AddRange(List<Note> notes, int indexPlace)
+	{
+		for (int i = 0; i < notes.Count(); i++)
+		{
+			_notes.Insert(indexPlace, notes[i]);
+			indexPlace += 1;
+		}
 		SortNotesByModification();
 	}
 
