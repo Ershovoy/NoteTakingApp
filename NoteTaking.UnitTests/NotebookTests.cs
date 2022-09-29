@@ -1,4 +1,4 @@
-﻿namespace NoteTaking.UnitTests;
+namespace NoteTaking.UnitTests;
 
 using NUnit.Framework;
 
@@ -93,6 +93,24 @@ public class NotebookTests
 
 		// Assert
 		Assert.That(expected, Is.EqualTo(actual));
+	}
+
+	[Test(Description = "Notebook clear notes test")]
+	public void ClearNotesTest()
+	{
+		// Arrange
+		var notebook = new Notebook();
+		notebook.AddNote(new Note("First note", "", NoteCategory.Undefined));
+		notebook.AddNote(new Note("Second note", "", NoteCategory.Home));
+		notebook.AddNote(new Note("Third note", "", NoteCategory.Undefined));
+		int expectedNoteCount = 0;
+
+		// Act
+		notebook.Clear();
+		int actualNoteCount = notebook.NotesCount;
+
+		// Assert
+		Assert.That(expectedNoteCount, Is.EqualTo(actualNoteCount));
 	}
 
 	[Test(Description = "Notebook get note property test")]

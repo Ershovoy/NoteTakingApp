@@ -95,6 +95,14 @@ public class Notebook
 	}
 
 	/// <summary>
+	/// Удалить все существующие заметки.
+	/// </summary>
+	public void Clear()
+	{
+		_notes.Clear();
+	}
+
+	/// <summary>
 	/// Сортировка заметок по времени их последнего изменения.
 	/// </summary>
 	public void SortNotesByModification()
