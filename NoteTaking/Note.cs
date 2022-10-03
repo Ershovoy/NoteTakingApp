@@ -64,7 +64,11 @@ public class Note
 		get { return _title; }
 		set
 		{
-			if (value != null && value.Length > _maxTitleLength)
+			if(value.Length <= 0)
+			{
+				throw new ArgumentException($"The note title must be greater than 0 characters.");
+			}
+			if (value.Length > _maxTitleLength)
 			{
 				throw new ArgumentException($"The note title must be less than {_maxTitleLength} characters.");
 			}

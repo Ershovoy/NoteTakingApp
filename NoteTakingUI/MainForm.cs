@@ -177,7 +177,6 @@ public partial class MainForm : Form
 			Note selectedNote = _displayedNotebook.ViewNote(NotesListBox.SelectedIndex);
 			_notebookData.LastOpenNote = selectedNote;
 			DisplayNoteContent(selectedNote);
-			NotebookSerializer.Save(_notebookData);
 			return;
 		}
 

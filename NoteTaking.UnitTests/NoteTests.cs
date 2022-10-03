@@ -5,96 +5,122 @@ using NUnit.Framework;
 [TestFixture]
 public class NoteTests
 {
-	// TODO: + протестировал не все свойства и методы. Еще куча конструкторов, и еще в куче свойств обновляет время изменения, но тестишь его только в одном NoteCategory - надо везде. А еще проверка дефолтных значений
-	[Test(Description = "Note title default value test")]
+	private Note _note;
+
+	[SetUp]
+	public void InitializeNote()
+	{
+		_note = new Note();
+	}
+
+	// TODO: + протестировал не все свойства и методы.
+	// Еще куча конструкторов, и еще в куче свойств обновляет время изменения, но тестишь его только в одном NoteCategory - надо везде.
+	// А еще проверка дефолтных значений
+	[Test(Description = "The default title of the note has the correct value")]
 	public void DefaultTitle_CorrectValue()
 	{
 		// Arrange
-		var note = new Note();
 		var expected = "Untitled Note";
 
 		// Act
-		var actual = note.Title;
+		var actual = _note.Title;
 
 		// Assert
-		Assert.That(expected, Is.EqualTo(actual));
+		Assert.That(expected, Is.EqualTo(actual),
+			"The note title by default has an incorrect value");
 	}
 
-	[Test(Description = "Note text default value test")]
+	[Test(Description = "The default text of the note has the correct value")]
 	public void DefaultText_CorrectValue()
 	{
 		// Arrange
-		var note = new Note();
 		var expected = "Write your note here.";
 
 		// Act
-		var actual = note.Text;
+		var actual = _note.Text;
 
 		// Assert
-		Assert.That(expected, Is.EqualTo(actual));
+		Assert.That(expected, Is.EqualTo(actual),
+			"The note text by default has an incorrect value");
 	}
 
-	[Test(Description = "Note category default value test")]
+	[Test(Description = "The default category of the note has the correct value")]
 	public void DefaultCategory_CorrectValue()
 	{
 		// Arrange
-		var note = new Note();
 		var expected = NoteCategory.Undefined;
 
 		// Act
-		var actual = note.Category;
+		var actual = _note.Category;
 
 		// Assert
-		Assert.That(expected, Is.EqualTo(actual));
+		Assert.That(expected, Is.EqualTo(actual),
+			"The note category by default has an incorrect value");
 	}
 
-	[Test(Description = "Note title getter/setter test")]
-	public void Title_CorrectValue()
+	[Test(Description = "Note title set the correct value")]
+	public void TitleSet_CorrectValue()
 	{
-		// TODO: + оформить все юнит-тесты в виде трёх блоков как сделано ниже: Подготовка данных Arrange, вызов тестируемой функциональности Act, и проверка правильности результата Assert
+		// TODO: + оформить все юнит-тесты в виде трёх блоков как сделано ниже:
+		// Подготовка данных Arrange, вызов тестируемой функциональности Act, и проверка правильности результата Assert
+
 		// Arrange
-		var note = new Note();
 		var expected = "First Note";
 
 		// Act
-		note.Title = "First Note";
-		var actual = note.Title;
+		_note.Title = "First Note";
+		var actual = _note.Title;
 
 		// Assert
-		Assert.That(expected, Is.EqualTo(actual));
+		Assert.That(expected, Is.EqualTo(actual),
+			"The setter of the note title set an incorrect value");
 	}
 
-	[Test(Description = "Note text getter/setter test")]
-	public void Text_CorrectValue()
+	[TestCase("", "The note title must be greater than 0 characters",
+		TestName = "Assigning an empty string as the title of a note")]
+	[TestCase("", "The note title must be must be less than 40 characters",
+		TestName = "Assigning an incorrect note title containing too many characters")]
+	public void TitleSet_ArgumentException(string wrongTitle, string failureMessage)
+	{
+		// Assert
+		Assert.Throws<ArgumentException>(() =>
+		{
+			// Act
+			_note.Title = wrongTitle;
+		}, failureMessage);
+	}
+
+	[Test(Description = "Note text set the correct value")]
+	public void TextSet_CorrectValue()
 	{
 		// Arrange
-		var note = new Note();
 		var expected = "Write you note here";
 
 		// Act
-		note.Text = "Write you note here";
-		var actual = note.Text;
+		_note.Text = "Write you note here";
+		var actual = _note.Text;
 
 		// Assert
-		Assert.That(expected, Is.EqualTo(actual));
+		Assert.That(expected, Is.EqualTo(actual),
+			"The setter of the note text set an incorrect value");
 	}
 
-	[Test(Description = "Note category getter/setter test")]
-	public void Category_CorrectValue()
+	[Test(Description = "Note category set the correct value")]
+	public void CategorySet_CorrectValue()
 	{
 		// Arrange
-		var note = new Note();
 		var expected = NoteCategory.Document;
 
 		// Act
-		note.Category = NoteCategory.Document;
-		var actual = note.Category;
+		_note.Category = NoteCategory.Document;
+		var actual = _note.Category;
 
 		// Assert
-		Assert.That(expected, Is.EqualTo(actual));
+		Assert.That(expected, Is.EqualTo(actual),
+			"The setter of the note category set an incorrect value");
 	}
 
-	[Test(Description = "Note constructor value test")]
+	[Test(Description = "Note constructor correct value")]
 	public void NoteConstructor_CorrectValue()
 	{
 		// Arrange
@@ -114,7 +140,7 @@ public class NoteTests
 		Assert.That(expectedCategory, Is.EqualTo(actualCategory));
 	}
 
-	[Test(Description = "Test of Note time modification change after editing title")]
+	[Test(Description = "Note time modification change after editing title")]
 	public void TitleChangeTime_ValueChanged()
 	{
 		// Arrange
@@ -129,7 +155,7 @@ public class NoteTests
 		Assert.That(expected, Is.LessThan(actual));
 	}
 
-	[Test(Description = "Test of Note time modification change after editing text")]
+	[Test(Description = "Note time modification change after editing text")]
 	public void TextChangeTime_ValueChanged()
 	{
 		// Arrange
@@ -144,7 +170,7 @@ public class NoteTests
 		Assert.That(expected, Is.LessThan(actual));
 	}
 
-	[Test(Description = "Test of Note time modification change after editing category")]
+	[Test(Description = "Note time modification change after editing category")]
 	public void CategoryChangeTime_ValueChanged()
 	{
 		// Arrange

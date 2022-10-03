@@ -5,19 +5,26 @@ using NUnit.Framework;
 [TestFixture]
 public class NotebookTests
 {
+	private Notebook _notebook;
+
+	[SetUp]
+	public void InitializeNotebook()
+	{
+		_notebook = new Notebook();
+	}
+
 	// TODO: + оформить тесты в виде блоков Arrange, Act, Assert (см. NoteTests)
 	[Test(Description = "Test changing count of notes after adding")]
 	public void NoteCount_ValueIncreased()
 	{
 		// TODO: + почему ты уверен, что число меняется правильно? А если после Remove счетчик не уменьшился, и не уменьшился после третьего AddNote()? Тогда счетчик вернет значение 2, но это будет ошибочное значение... Логика теста неправильная
 		// Arrange
-		var notebook = new Notebook();
 		int expected = 2;
 
 		// Act
-		notebook.AddNote(new Note());
-		notebook.AddNote(new Note());
-		int actual = notebook.NotesCount;
+		_notebook.AddNote(new Note());
+		_notebook.AddNote(new Note());
+		int actual = _notebook.NotesCount;
 
 		// Assert
 		Assert.That(expected, Is.EqualTo(actual));
@@ -27,14 +34,13 @@ public class NotebookTests
 	public void NoteCount_ValueDecreased()
 	{
 		// Arrange
-		var notebook = new Notebook();
 		int expected = 1;
 
 		// Act
-		notebook.AddNote(new Note());
-		notebook.AddNote(new Note());
-		notebook.RemoveNote(1);
-		int actual = notebook.NotesCount;
+		_notebook.AddNote(new Note());
+		_notebook.AddNote(new Note());
+		_notebook.RemoveNote(1);
+		int actual = _notebook.NotesCount;
 
 		// Assert
 		Assert.That(expected, Is.EqualTo(actual));
@@ -45,12 +51,11 @@ public class NotebookTests
 	public void AddNoteTest()
 	{
 		// Arrange
-		var notebook = new Notebook();
 		var expected = new Note("First note", "WASD", NoteCategory.Home);
 
 		// Act
-		notebook.AddNote(expected);
-		var actual = notebook[0];
+		_notebook.AddNote(expected);
+		var actual = _notebook[0];
 
 		// Assert
 		Assert.That(expected, Is.EqualTo(actual));
@@ -63,7 +68,7 @@ public class NotebookTests
 		var expected = new Notebook();
 		expected.AddNote(new Note("Test note", "", NoteCategory.Document));
 		expected.AddNote(new Note("Second note", "", NoteCategory.Undefined));
-		
+
 		// Act
 		var actual = new Notebook();
 		List<Note> notes = expected.GetNotesWithCategory(NoteCategory.Undefined);
@@ -77,14 +82,16 @@ public class NotebookTests
 	public void RemoveNoteTest()
 	{
 		// Arrange
-		var notebook = new Notebook();
-		notebook.AddNote(new Note("Second note", "WASD", NoteCategory.Home));
+		_notebook.AddNote(new Note("Second note", "WASD", NoteCategory.Home));
 
 		// Act
-		notebook.RemoveNote(0);
+		_notebook.RemoveNote(0);
 
 		// Assert
-		Assert.Throws<ArgumentOutOfRangeException>(() => { notebook[0].Title = "New title"; });
+		Assert.Throws<ArgumentOutOfRangeException>(() =>
+		{
+			_notebook[0].Title = "New title";
+		});
 	}
 
 	[Test(Description = "Removing note from notebook test by specifying certain note")]
@@ -112,36 +119,35 @@ public class NotebookTests
 		Assert.That(expected, Is.EqualTo(actual));
 	}
 
-	[Test(Description = "Notebook clear notes test")]
+	[Test(Description = "Notebook clear all notes")]
 	public void ClearTest()
 	{
 		// Arrange
-		var notebook = new Notebook();
-		notebook.AddNote(new Note("First note", "", NoteCategory.Undefined));
-		notebook.AddNote(new Note("Second note", "", NoteCategory.Home));
-		notebook.AddNote(new Note("Third note", "", NoteCategory.Undefined));
+		_notebook.AddNote(new Note("First note", "", NoteCategory.Undefined));
+		_notebook.AddNote(new Note("Second note", "", NoteCategory.Home));
+		_notebook.AddNote(new Note("Third note", "", NoteCategory.Other));
 		int expectedNoteCount = 0;
 
 		// Act
-		notebook.Clear();
-		int actualNoteCount = notebook.NotesCount;
+		_notebook.Clear();
+		int actualNoteCount = _notebook.NotesCount;
 
 		// Assert
-		Assert.That(expectedNoteCount, Is.EqualTo(actualNoteCount));
+		Assert.That(expectedNoteCount, Is.EqualTo(actualNoteCount),
+			"Clear method deleted not all notes form the notebook");
 	}
 
 	[Test(Description = "Notebook get note property test")]
 	public void GetNoteTest()
 	{
 		// Arrange
-		var notebook = new Notebook();
-		notebook.AddNote(new Note("First note", "", NoteCategory.Undefined));
-		notebook.AddNote(new Note("Second note", "", NoteCategory.Home));
-		notebook.AddNote(new Note("Third note", "", NoteCategory.Undefined));
+		_notebook.AddNote(new Note("First note", "", NoteCategory.Undefined));
+		_notebook.AddNote(new Note("Second note", "", NoteCategory.Home));
+		_notebook.AddNote(new Note("Third note", "", NoteCategory.Undefined));
 		var expected = new Note("Third note", "", NoteCategory.Undefined);
 
 		// Act
-		var actual = notebook[0];
+		var actual = _notebook[0];
 
 		// Assert
 		Assert.That(expected.Title, Is.EqualTo(actual.Title));
@@ -153,18 +159,17 @@ public class NotebookTests
 	public void SortNotebookTest()
 	{
 		// Arrange
-		var notebook = new Notebook();
-		notebook.AddNote(new Note("First note", "", NoteCategory.Undefined));
-		notebook.AddNote(new Note("Second note", "", NoteCategory.Home));
-		notebook.AddNote(new Note("Third note", "", NoteCategory.Undefined));
-		notebook.AddNote(new Note("Fourth note", "", NoteCategory.Home));
-		notebook.AddNote(new Note("Fifth note", "", NoteCategory.Document));
-		var expected1 = notebook[1];
-		var expected2 = notebook[3];
+		_notebook.AddNote(new Note("First note", "", NoteCategory.Undefined));
+		_notebook.AddNote(new Note("Second note", "", NoteCategory.Home));
+		_notebook.AddNote(new Note("Third note", "", NoteCategory.Undefined));
+		_notebook.AddNote(new Note("Fourth note", "", NoteCategory.Home));
+		_notebook.AddNote(new Note("Fifth note", "", NoteCategory.Document));
+		var expected1 = _notebook[1];
+		var expected2 = _notebook[3];
 
 		// TODO: + сортировка меняет порядок целой коллекции, надо проверять что вся коллекция поменялась.
 		// Act
-		var actual = notebook.GetNotesWithCategory(NoteCategory.Home);
+		var actual = _notebook.GetNotesWithCategory(NoteCategory.Home);
 
 		// Assert
 		// TODO: + почему ты этим ассертом уверен, что expected и actual - это действительно одна и та же заметка? А если это 1 и 3 заметки? Они же одной категории. Неправильная логика проверки результата

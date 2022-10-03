@@ -7,7 +7,7 @@ public class NotebookSerializerTests
 {
 	// TODO: + когда будет отдельный класс для сохранения загрузки блокнота, тесты тоже вынести в отдельный класс
 	[Test(Description = "Save and load notebook test")]
-	public void SaveLoadNotebookTest()
+	public void SaveLoadNotebook_CorrectValue()
 	{
 		// Arrange
 		var expected = new Notebook();
@@ -25,5 +25,11 @@ public class NotebookSerializerTests
 		// TODO: + где проверка того, что загрузилось? А если метод вернул null или пустой блокнот?
 		Assert.That(actual, Is.Not.Null);
 		Assert.That(expected, Is.EqualTo(actual));
+
+		// Teardown
+		if (File.Exists(NotebookSerializer.Path))
+		{
+			File.Delete(NotebookSerializer.Path);
+		}
 	}
 }
