@@ -14,10 +14,12 @@ public class NotebookTests
 	}
 
 	// TODO: + оформить тесты в виде блоков Arrange, Act, Assert (см. NoteTests)
-	[Test(Description = "Test changing count of notes after adding")]
+	[Test(Description = "The value of notes count increased after adding notes")]
 	public void NoteCount_ValueIncreased()
 	{
-		// TODO: + почему ты уверен, что число меняется правильно? А если после Remove счетчик не уменьшился, и не уменьшился после третьего AddNote()? Тогда счетчик вернет значение 2, но это будет ошибочное значение... Логика теста неправильная
+		// TODO: + почему ты уверен, что число меняется правильно?
+		// А если после Remove счетчик не уменьшился, и не уменьшился после третьего AddNote()?
+		// Тогда счетчик вернет значение 2, но это будет ошибочное значение... Логика теста неправильная
 		// Arrange
 		int expected = 2;
 
@@ -27,10 +29,11 @@ public class NotebookTests
 		int actual = _notebook.NotesCount;
 
 		// Assert
-		Assert.That(expected, Is.EqualTo(actual));
+		Assert.That(expected, Is.EqualTo(actual),
+			"The value of notes count didn't increase after adding notes");
 	}
 
-	[Test(Description = "Test changing count of notes after adding/removing")]
+	[Test(Description = "The value of notes count decreased after removing notes")]
 	public void NoteCount_ValueDecreased()
 	{
 		// Arrange
@@ -43,12 +46,13 @@ public class NotebookTests
 		int actual = _notebook.NotesCount;
 
 		// Assert
-		Assert.That(expected, Is.EqualTo(actual));
+		Assert.That(expected, Is.EqualTo(actual),
+			"The value of notes count didn't decreased after removing note");
 	}
 
 	// TODO: + именование метода теста не соответствует требованиям
-	[Test(Description = "Adding note to notebook test")]
-	public void AddNoteTest()
+	[Test(Description = "The note is added to the notebook")]
+	public void AddNote_CorrectValue()
 	{
 		// Arrange
 		var expected = new Note("First note", "WASD", NoteCategory.Home);
@@ -58,15 +62,16 @@ public class NotebookTests
 		var actual = _notebook[0];
 
 		// Assert
-		Assert.That(expected, Is.EqualTo(actual));
+		Assert.That(expected, Is.EqualTo(actual),
+			"The note wasn't added to the notebook");
 	}
 
 	[Test(Description = "Notebook add range of notes test")]
-	public void AddRangeTest()
+	public void AddRange_CorrectValue()
 	{
 		// Arrange
 		var expected = new Notebook();
-		expected.AddNote(new Note("Test note", "", NoteCategory.Document));
+		expected.AddNote(new Note("First note", "", NoteCategory.Document));
 		expected.AddNote(new Note("Second note", "", NoteCategory.Undefined));
 
 		// Act
@@ -78,8 +83,8 @@ public class NotebookTests
 		Assert.That(expected, Is.EqualTo(actual));
 	}
 
-	[Test(Description = "Removing note from notebook test")]
-	public void RemoveNoteTest()
+	[Test(Description = "The note from notebook is removed by index")]
+	public void RemoveNote_ByIndex_ArgumentException()
 	{
 		// Arrange
 		_notebook.AddNote(new Note("Second note", "WASD", NoteCategory.Home));
@@ -91,41 +96,35 @@ public class NotebookTests
 		Assert.Throws<ArgumentOutOfRangeException>(() =>
 		{
 			_notebook[0].Title = "New title";
-		});
+		}, "The note form notebook wasn't removed by index");
 	}
 
-	[Test(Description = "Removing note from notebook test by specifying certain note")]
-	public void RemoveNoteTest2()
+	[Test(Description = "The note from notebook is removed by specifying certain note")]
+	public void RemoveNote_ByNote_ArgumentException()
 	{
 		// Arrange
-		var actual = new Notebook();
-		actual.AddNote(new Note("First note", "", NoteCategory.Undefined));
-		actual.AddNote(new Note("Second note", "", NoteCategory.Undefined));
-		actual.AddNote(new Note("The Bible",
+		Note noteToDelete = new Note("The Bible",
 			"In the beginning God created the heavens and the earth.",
-			NoteCategory.Document));
-
-		var expected = new Notebook();
-		List<Note> notes = actual.GetNotesWithCategory(NoteCategory.Undefined);
-		expected.AddRange(notes, 0);
-
-		actual.AddNote(new Note("Demonic note", "^&*#!)@^$&^_@#)_+!", NoteCategory.Other));
-		Note noteToDelete = actual[0];
+			NoteCategory.Document);
+		_notebook.AddNote(noteToDelete);
 
 		// Act
-		actual.RemoveNote(noteToDelete);
+		_notebook.RemoveNote(noteToDelete);
 
 		// Assert
-		Assert.That(expected, Is.EqualTo(actual));
+		Assert.Throws<ArgumentOutOfRangeException>(() =>
+		{
+			_notebook[0].Title = "New title";
+		}, "The note form notebook wasn't removed by specifying certain note");
 	}
 
-	[Test(Description = "Notebook clear all notes")]
-	public void ClearTest()
+	[Test(Description = "Clear all notes from the notebook")]
+	public void Clear_CorrectValue()
 	{
 		// Arrange
 		_notebook.AddNote(new Note("First note", "", NoteCategory.Undefined));
-		_notebook.AddNote(new Note("Second note", "", NoteCategory.Home));
-		_notebook.AddNote(new Note("Third note", "", NoteCategory.Other));
+		_notebook.AddNote(new Note("Second note", "", NoteCategory.Undefined));
+		_notebook.AddNote(new Note("Third note", "", NoteCategory.Undefined));
 		int expectedNoteCount = 0;
 
 		// Act
@@ -134,46 +133,81 @@ public class NotebookTests
 
 		// Assert
 		Assert.That(expectedNoteCount, Is.EqualTo(actualNoteCount),
-			"Clear method deleted not all notes form the notebook");
+			"Clear method deleted not all notes from the notebook");
 	}
 
-	[Test(Description = "Notebook get note property test")]
-	public void GetNoteTest()
+	[Test(Description = "Get note property of the notebook return correct value")]
+	public void GetNote_CorrectValue()
+	{
+		// Arrange
+		_notebook.AddNote(new Note("First note", "", NoteCategory.Undefined));
+		var expected = new Note("Second note", "", NoteCategory.Home);
+		_notebook.AddNote(expected);
+		_notebook.AddNote(new Note("Third note", "", NoteCategory.Undefined));
+
+		// Act
+		var actual = _notebook[1];
+
+		// Assert
+		Assert.That(expected, Is.EqualTo(actual),
+			"The note getter of the notebook return an incorrect value");
+	}
+
+	[Test(Description = "Set note property of the notebook set correct value")]
+	public void SetNote_ValueChanged()
 	{
 		// Arrange
 		_notebook.AddNote(new Note("First note", "", NoteCategory.Undefined));
 		_notebook.AddNote(new Note("Second note", "", NoteCategory.Home));
-		_notebook.AddNote(new Note("Third note", "", NoteCategory.Undefined));
-		var expected = new Note("Third note", "", NoteCategory.Undefined);
+		var expected = new Note("Third note", "", NoteCategory.Home);
 
 		// Act
+		_notebook[0] = expected;
 		var actual = _notebook[0];
 
 		// Assert
-		Assert.That(expected.Title, Is.EqualTo(actual.Title));
-		Assert.That(expected.Text, Is.EqualTo(actual.Text));
-		Assert.That(expected.Category, Is.EqualTo(actual.Category));
+		Assert.That(expected, Is.EqualTo(actual),
+			"The note setter of the notebook set an incorrect value");
 	}
 
-	[Test(Description = "Get notes with certain category from notebook test")]
-	public void SortNotebookTest()
+	[Test(Description = "The last open note from the notebook has changed")]
+	public void LastOpenNote_ValueChanged()
 	{
 		// Arrange
 		_notebook.AddNote(new Note("First note", "", NoteCategory.Undefined));
 		_notebook.AddNote(new Note("Second note", "", NoteCategory.Home));
-		_notebook.AddNote(new Note("Third note", "", NoteCategory.Undefined));
+		var expected = new Note("Third note", "", NoteCategory.Document);
+		_notebook.AddNote(expected);
+		_notebook.AddNote(new Note("Fourth note", "", NoteCategory.Undefined));
+
+		// Act
+		_notebook.ViewNote(1);
+		var actual = _notebook.LastOpenNote;
+
+		// Assert
+		Assert.That(expected, Is.EqualTo(actual),
+			"The last open note from the notebook hasn't changed");
+	}
+
+	[Test(Description = "Get all notes with certain category from the notebook")]
+	public void GetNotesWithCategory_CorrectValue()
+	{
+		// Arrange
+		_notebook.AddNote(new Note("First note", "", NoteCategory.Undefined));
+		_notebook.AddNote(new Note("Second note", "", NoteCategory.Home));
+		_notebook.AddNote(new Note("Third note", "", NoteCategory.Other));
 		_notebook.AddNote(new Note("Fourth note", "", NoteCategory.Home));
 		_notebook.AddNote(new Note("Fifth note", "", NoteCategory.Document));
-		var expected1 = _notebook[1];
-		var expected2 = _notebook[3];
+		List<Note> expected = new List<Note>() { _notebook[1], _notebook[3] };
 
 		// TODO: + сортировка меняет порядок целой коллекции, надо проверять что вся коллекция поменялась.
 		// Act
 		var actual = _notebook.GetNotesWithCategory(NoteCategory.Home);
 
 		// Assert
-		// TODO: + почему ты этим ассертом уверен, что expected и actual - это действительно одна и та же заметка? А если это 1 и 3 заметки? Они же одной категории. Неправильная логика проверки результата
-		Assert.That(expected1, Is.EqualTo(actual[0]));
-		Assert.That(expected2, Is.EqualTo(actual[1]));
+		// TODO: + почему ты этим ассертом уверен, что expected и actual - это действительно одна и та же заметка?
+		// А если это 1 и 3 заметки? Они же одной категории. Неправильная логика проверки результата
+		Assert.That(expected, Is.EqualTo(actual),
+			"Return an incorrect list of notes with certain category from the notebook");
 	}
 }
