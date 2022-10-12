@@ -163,7 +163,7 @@ public class Note
 	public override bool Equals(object? obj)
 	{
 		var other = obj as Note;
-		if (other == null)
+		if (other is null)
 		{
 			return false;
 		}

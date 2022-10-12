@@ -55,7 +55,7 @@ public static class NotebookSerializer
 
 		string fileText = File.ReadAllText(Path);
 		Notebook? notebook = JsonConvert.DeserializeObject<Notebook>(fileText);
-		if (notebook == null)
+		if (notebook is null)
 		{
 			return new Notebook();
 		}
