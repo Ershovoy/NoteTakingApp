@@ -54,7 +54,7 @@
 			this.AppVersionLabel.Name = "AppVersionLabel";
 			this.AppVersionLabel.Size = new System.Drawing.Size(37, 15);
 			this.AppVersionLabel.TabIndex = 1;
-			this.AppVersionLabel.Text = "v0.3.0";
+			this.AppVersionLabel.Text = "v1.0.0";
 			// 
 			// AppAuthorLabel
 			// 

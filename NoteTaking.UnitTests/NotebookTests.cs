@@ -13,13 +13,9 @@ public class NotebookTests
 		_notebook = new Notebook();
 	}
 
-	// TODO: + оформить тесты в виде блоков Arrange, Act, Assert (см. NoteTests)
 	[Test(Description = "The value of notes count increased after adding notes")]
 	public void NoteCount_ValueIncreased()
 	{
-		// TODO: + почему ты уверен, что число меняется правильно?
-		// А если после Remove счетчик не уменьшился, и не уменьшился после третьего AddNote()?
-		// Тогда счетчик вернет значение 2, но это будет ошибочное значение... Логика теста неправильная
 		// Arrange
 		int expected = 2;
 
@@ -50,7 +46,6 @@ public class NotebookTests
 			"The value of notes count didn't decreased after removing note");
 	}
 
-	// TODO: + именование метода теста не соответствует требованиям
 	[Test(Description = "The note is added to the notebook")]
 	public void AddNote_CorrectValue()
 	{
@@ -200,12 +195,10 @@ public class NotebookTests
 		_notebook.AddNote(new Note("Fifth note", "", NoteCategory.Document));
 		List<Note> expected = new List<Note>() { _notebook[1], _notebook[3] };
 
-		// TODO: + сортировка меняет порядок целой коллекции, надо проверять что вся коллекция поменялась.
 		// Act
 		var actual = _notebook.GetNotesWithCategory(NoteCategory.Home);
 
 		// Assert
-		// TODO: + почему ты этим ассертом уверен, что expected и actual - это действительно одна и та же заметка?
 		// А если это 1 и 3 заметки? Они же одной категории. Неправильная логика проверки результата
 		Assert.That(expected, Is.EqualTo(actual),
 			"Return an incorrect list of notes with certain category from the notebook");

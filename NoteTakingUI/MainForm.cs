@@ -4,9 +4,6 @@ namespace NoteTakingUI;
 
 public partial class MainForm : Form
 {
-	// TODO: кнопки в интерфейсе не плоские. Убрать рамку, убрать фон другого цвета
-
-	// TODO: + название поле скрывает, что это объект Notebook. Ожидания, что это какой-то DataSet для таблицы, например, а здесь объект целого класса
 	/// <summary>
 	/// Список заметок.
 	/// </summary>
@@ -24,23 +21,14 @@ public partial class MainForm : Form
 	{
 		InitializeComponent();
 
-		_notebookData = new Notebook();
-		_displayedNotebook = _notebookData;
+		_displayedNotebook = new Notebook();
 
-		// TODO: + проверкой существования файла должен заниматься сериалайзер.
-		// Чем меньше логики в окнах, тем лучше. Здесь должен остаться только вызов MessageBox.
 		try
 		{
 			_notebookData = NotebookSerializer.Load();
 		}
-		catch (FileNotFoundException exception)
-		{
-			MessageBox.Show(exception.Message, "Error occured.");
-		}
 		catch
 		{
-			// TODO: + длинная строка
-			// TODO: + вместо string.Format люди давно используют интерполяцию строк
 			MessageBox.Show($"Failed to load notebook from {NotebookSerializer.Path}, " +
 				$"file with notebook data corrupted.", "Error occured.");
 		}
@@ -60,11 +48,9 @@ public partial class MainForm : Form
 	/// </summary>
 	private void UpdateNoteListBox()
 	{
-		// TODO: + не надо нагромождать всё в одну строку. Бей на строки, создавай локальные переменные.
-		// Лучше всего читается код, когда в одной строке одно действие
 		NoteCategory selectedNoteCategory = (NoteCategory)CategoryComboBox.SelectedItem;
 		List<Note> notes = _notebookData.GetNotesWithCategory(selectedNoteCategory);
-		// TODO: + заменить на AddRange, когда будет изменен возвращаемый тип данных метода GetNotesWithCategory()
+
 		_displayedNotebook.Clear();
 		_displayedNotebook.AddRange(notes, 0);
 
@@ -82,7 +68,6 @@ public partial class MainForm : Form
 	private void DisplayNoteContent(Note note)
 	{
 		NoteTitleLabel.Text = note.Title;
-		// TODO: + интерполяция строк
 		NoteCategoryLabel.Text = $"Category: {note.Category}";
 		NoteTextRichTextBox.Text = note.Text;
 		NoteCreationDateTime.Value = note.CreationTime;
@@ -104,7 +89,6 @@ public partial class MainForm : Form
 	private void CreateNoteButton_Click(object sender, EventArgs e)
 	{
 		Note newNote = new();
-		// TODO: + имя локальной переменной отличается от имени класса - недопереименовал
 		NoteForm noteForm = new();
 		noteForm.Note = newNote;
 		DialogResult result = noteForm.ShowDialog();
@@ -123,8 +107,6 @@ public partial class MainForm : Form
 	private void EditNoteButton_Click(object sender, EventArgs e)
 	{
 		int selectedNoteIndex = NotesListBox.SelectedIndex;
-		// TODO: + вместо тяжелого и медленного механизма try-catch быстрее и проще в начале метода проверить index на -1 и показать сообщение.
-		// Работать будет быстрее, а из метода исчезнет вложенность из-за блока try.
 		if (selectedNoteIndex == -1)
 		{
 			MessageBox.Show("Please select what note need to be edited.", "Error occured.");
@@ -132,7 +114,6 @@ public partial class MainForm : Form
 		}
 
 		Note selectedNote = _displayedNotebook[selectedNoteIndex];
-		// TODO: + опять имя локальной переменной
 		NoteForm noteForm = new();
 		noteForm.Note = selectedNote;
 		DialogResult result = noteForm.ShowDialog();
@@ -150,20 +131,18 @@ public partial class MainForm : Form
 	private void RemoveNoteButton_Click(object sender, EventArgs e)
 	{
 		int selectedNoteIndex = NotesListBox.SelectedIndex;
-		// TODO: + заменить try-catch на if в начале метода.
 		if (selectedNoteIndex == -1)
 		{
 			MessageBox.Show("Please select what note need to be removed.", "Error occured.");
 			return;
 		}
 
-		// TODO: + зачем замена заголовка?
 		Note noteToDelete = _displayedNotebook[selectedNoteIndex];
 		_notebookData.RemoveNote(noteToDelete);
 		_notebookData.SortNotesByModification();
 		NotesListBox.SelectedIndex = -1;
 		UpdateNoteListBox();
-		// TODO: + Нет пересохранения после удаления заметки - данные ведь изменились
+
 		NotebookSerializer.Save(_notebookData);
 	}
 
@@ -180,7 +159,6 @@ public partial class MainForm : Form
 			return;
 		}
 
-		// TODO: + чтобы не делать допвложенность, можно удалить else, а в ветке под условием if добавить оператор return
 		Note lastOpenNote = _notebookData.LastOpenNote;
 		NoteTitleLabel.Text = lastOpenNote.Title;
 		NoteCategoryLabel.Text = $"Category: {lastOpenNote.Category}";

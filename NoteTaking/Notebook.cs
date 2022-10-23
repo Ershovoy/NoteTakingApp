@@ -5,10 +5,6 @@
 /// </summary>
 public class Notebook
 {
-	// TODO: + по заданию, программа должна еще сохранять и последнюю выбранную заметку, а при запуске открывать её снова.
-
-	// TODO: + опять лишние атрибуты у полей и свойств
-	// TODO: + длинная строка
 	/// <summary>
 	/// Справочная заметка.
 	/// </summary>
@@ -69,7 +65,6 @@ public class Notebook
 	{
 		get
 		{
-			// TODO: + зачем здесь вызывается сортировка?
 			return _notes[index];
 		}
 		set
@@ -84,7 +79,6 @@ public class Notebook
 	/// </summary>
 	public Notebook()
 	{
-		// TODO: + у тебя уже выделяется память при объявлении поля. Зачем второе выделение?
 		_notes = new();
 	}
 
@@ -190,8 +184,6 @@ public class Notebook
 			return _notes;
 		}
 
-		// TODO: + блокнот создает экземпляры других блокнотов? Неправильно.
-		// Возвращаться должен обычный список заметок, но не блокнот.
 		List<Note> result = new();
 		foreach (Note note in _notes)
 		{

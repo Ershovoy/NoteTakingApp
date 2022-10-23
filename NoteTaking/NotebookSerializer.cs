@@ -32,10 +32,6 @@ public static class NotebookSerializer
 	/// <param name="notebook">Блокнот для сохранения.</param>
 	public static void Save(Notebook notebook)
 	{
-		// TODO: + лучше в одной строке вызывать сериализацию, а во второй запись в файл - 
-		// строки короче, читаемее и проще в отладке (брейкпоинты можно поставить на каждую отдельную строчку)
-
-		// TODO: + даже внутри класса не надо обращаться к полям напрямую - лучше через свойства. Класс тоже должен работать с полями через валидацию
 		string serializedNotebook = JsonConvert.SerializeObject(notebook, Formatting.Indented);
 		File.WriteAllText(Path, serializedNotebook);
 	}
@@ -46,11 +42,11 @@ public static class NotebookSerializer
 	/// <returns>Загруженный блокнот.</returns>
 	public static Notebook Load()
 	{
-		// TODO: + а если исключения? А если файл не существует? Сделать обработку исключений, которая будет возвращать пустой блокнот
 		if (!File.Exists(Path))
 		{
-			throw new FileNotFoundException($"Failed to load notebook from {Path}.\n" +
-				$"File with notebook data didn't exist. So created one.");
+			Notebook result = new Notebook();
+			result.LastOpenNote = result.HelpNote;
+			return result;
 		}
 
 		string fileText = File.ReadAllText(Path);

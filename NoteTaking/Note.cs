@@ -27,8 +27,6 @@ public class Note
 	/// </summary>
 	private const int _maxTitleLength = 40;
 
-	// TODO: + зачем делать все поля как JsonProperty, но при этом игнорировать все свойства?
-	// Куча лишних атрибутов, можно реализовать без них. Например, сделав закрытый конструктор для сериализации
 	/// <summary>
 	/// Заголовок заметки.
 	/// </summary>
@@ -39,7 +37,6 @@ public class Note
 	/// </summary>
 	private string _text;
 
-	// TODO: + неправильное использование комментария
 	/// <summary>
 	/// Категория заметки.
 	/// </summary>
@@ -55,7 +52,6 @@ public class Note
 	/// </summary>
 	private DateTime _modificationTime = DateTime.Now;
 
-	// TODO: + класс должен сам валидировать поле на длину. Где проверка?
 	/// <summary>
 	/// Заголовок заметки.
 	/// </summary>
@@ -104,7 +100,6 @@ public class Note
 		}
 	}
 
-	// TODO: + в интерфейсе свойство называется Created. Где правда? Исправить, сделать единообразно везде
 	/// <summary>
 	/// Время создания заметки.
 	/// </summary>
@@ -145,7 +140,6 @@ public class Note
 	/// <param name="title">Заголовок заметки.</param>
 	/// <param name="text">Содержимое заметки.</param>
 	/// <param name="noteCategory">Категория заметки.</param>
-	// TODO: + не должно быть строк длиннее 100 символов, исправить
 	public Note(string title = _defaultNoteTitle,
 		string text = _defaultNoteText,
 		NoteCategory noteCategory = _defaultNoteCategory)

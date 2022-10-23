@@ -7,13 +7,11 @@ namespace NoteTakingUI;
 /// </summary>
 public partial class NoteForm : Form
 {
-	// TODO: + зачем фраза ToEdit? 1) поле именуется как и свойство. Свойство переименовал, почему поле оставил? Не надо нагромождать названия лишними словами
 	/// <summary>
 	/// Текущая выбранная заметка для редактирования в этой форме.
 	/// </summary>
 	private Note _note;
 
-	// TODO: + просто Note
 	/// <summary>
 	/// Редактированная заметка.
 	/// </summary>
@@ -32,7 +30,6 @@ public partial class NoteForm : Form
 		}
 	}
 
-	// TODO: + Если есть get-свойство EditedNote, тогда лучше сделать свойству set вместо передачи заметки в конструктор
 	/// <summary>
 	/// Конструктор без параметров.
 	/// </summary>
@@ -48,13 +45,11 @@ public partial class NoteForm : Form
 		}
 	}
 
-	// TODO: + что за "именты"?
 	/// <summary>
 	/// Принять внесённые изменения в заметку.
 	/// </summary>
 	private void OkButton_Click(object sender, EventArgs e)
 	{
-		// TODO: + валидация должна в бизнес-логике, а форма должна просто ловить исключения с ошибками и показывать из них текст пользователю.
 		try
 		{
 			_note.Title = NoteTitleTextBox.Text;

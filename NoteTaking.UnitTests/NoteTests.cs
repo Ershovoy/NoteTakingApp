@@ -13,9 +13,6 @@ public class NoteTests
 		_note = new Note();
 	}
 
-	// TODO: + протестировал не все свойства и методы.
-	// Еще куча конструкторов, и еще в куче свойств обновляет время изменения, но тестишь его только в одном NoteCategory - надо везде.
-	// А еще проверка дефолтных значений
 	[Test(Description = "The default title of the note has the correct value")]
 	public void DefaultTitle_CorrectValue()
 	{
@@ -61,9 +58,6 @@ public class NoteTests
 	[Test(Description = "Note title set the correct value")]
 	public void TitleSet_CorrectValue()
 	{
-		// TODO: + оформить все юнит-тесты в виде трёх блоков как сделано ниже:
-		// Подготовка данных Arrange, вызов тестируемой функциональности Act, и проверка правильности результата Assert
-
 		// Arrange
 		var expected = "First Note";
 
